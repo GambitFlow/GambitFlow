@@ -310,7 +310,7 @@ const PAGES = {
 
                 <h3 style="margin-top: 2rem;">API Usage</h3>
                 <pre style="background: var(--bg-tertiary); padding: 1rem; border-radius: 0.5rem; overflow-x: auto;">
-curl -X POST https://gambitflow-nexus-core-inference-api.hf.space/predict \\
+curl -X POST https://gambitflow-nexus-core-inference-api.hf.space/get-move \\
   -H "Content-Type: application/json" \\
   -d '{
     "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
@@ -328,7 +328,7 @@ curl -X POST https://gambitflow-nexus-core-inference-api.hf.space/predict \\
             <div class="card" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
                 <h2>Endpoints</h2>
                 
-                <h3 style="margin-top: 2rem;">POST /predict</h3>
+                <h3 style="margin-top: 2rem;">POST /get-move</h3>
                 <p>Get the best move for a given position</p>
                 
                 <h4 style="margin-top: 1rem;">Request Body</h4>
@@ -470,7 +470,7 @@ async function makeAIMove() {
     
     try {
         const modelConfig = CONFIG.MODELS[STATE.currentModel];
-        const response = await fetch(`${modelConfig.endpoint}/predict`, {
+        const response = await fetch(`${modelConfig.endpoint}/get-move`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
