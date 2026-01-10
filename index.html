@@ -3,67 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GambitFlow - Professional Chess AI</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>GambitFlow - Advanced Chess AI</title>
+    <meta name="description" content="Professional chess AI powered by deep learning neural networks">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/animations.css">
+    
+    <!-- External Dependencies -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header (Always Visible) -->
-    <header class="header">
-        <nav class="nav container">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
             <div class="nav-brand">
-                <a href="#home" onclick="navigateTo('home')">
-                    <svg class="logo" width="40" height="40" viewBox="0 0 40 40">
-                        <path d="M20 5L25 15H15L20 5Z" fill="currentColor"/>
-                        <circle cx="20" cy="25" r="10" fill="currentColor" opacity="0.2"/>
-                    </svg>
-                    <span class="brand-name">GambitFlow</span>
-                </a>
+                <svg class="logo" width="48" height="48" viewBox="0 0 48 48">
+                    <path d="M24 8L28 18H20L24 8Z" fill="currentColor"/>
+                    <circle cx="24" cy="30" r="12" fill="currentColor" opacity="0.2"/>
+                </svg>
+                <span>GambitFlow</span>
             </div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" onclick="navigateTo('home')" class="nav-link active">Home</a></li>
-                <li><a href="#play" onclick="navigateTo('play')" class="nav-link">Play</a></li>
-                <li><a href="#models" onclick="navigateTo('models')" class="nav-link">Models</a></li>
-                <li><a href="#docs" onclick="navigateTo('docs')" class="nav-link">Docs</a></li>
-                <li><a href="#api" onclick="navigateTo('api')" class="nav-link">API</a></li>
-                <li><a href="#status" onclick="navigateTo('status')" class="nav-link">Status</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#play" class="nav-link" data-page="play">Play</a></li>
+                <li><a href="#models" class="nav-link" data-page="models">Models</a></li>
+                <li><a href="#docs" class="nav-link" data-page="docs">Docs</a></li>
+                <li><a href="#api" class="nav-link" data-page="api">API</a></li>
+                <li><a href="#status" class="nav-link" data-page="status">Status</a></li>
             </ul>
-            <button class="mobile-toggle" onclick="toggleMobileMenu()">
-                <span></span><span></span><span></span>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <!-- Main App Container -->
-    <main id="app">
-        <!-- Pages will be injected here -->
-    </main>
+    <!-- Main Content -->
+    <main id="app"></main>
 
-    <!-- Footer (Always Visible) -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-grid">
                 <div class="footer-section">
                     <h3>GambitFlow</h3>
                     <p>Advanced chess AI powered by deep learning</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
+                    <h4>Models</h4>
                     <ul>
-                        <li><a href="#play" onclick="navigateTo('play')">Play</a></li>
-                        <li><a href="#models" onclick="navigateTo('models')">Models</a></li>
-                        <li><a href="#docs" onclick="navigateTo('docs')">Documentation</a></li>
+                        <li><a href="#models">Nexus-Nano</a></li>
+                        <li><a href="#models">Nexus-Core</a></li>
+                        <li><a href="#models">Synapse-Base</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Resources</h4>
                     <ul>
+                        <li><a href="#docs">Documentation</a></li>
+                        <li><a href="#api">API Reference</a></li>
                         <li><a href="https://huggingface.co/GambitFlow" target="_blank">HuggingFace</a></li>
-                        <li><a href="#" target="_blank">GitHub</a></li>
-                        <li><a href="#status" onclick="navigateTo('status')">Status</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="#status">System Status</a></li>
+                        <li><a href="https://github.com/GambitFlow" target="_blank">GitHub</a></li>
                     </ul>
                 </div>
             </div>
@@ -78,6 +89,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="app.js"></script>
+    <script src="js/core/config.js"></script>
+    <script src="js/core/state.js"></script>
+    <script src="js/core/router.js"></script>
+    <script src="js/modules/api-client.js"></script>
+    <script src="js/modules/chess-game.js"></script>
+    <script src="js/modules/status-monitor.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
