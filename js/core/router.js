@@ -449,15 +449,18 @@ const Router = {
         const board = document.getElementById('heroBoard');
         if (!board) return;
         
+        // Clear any existing content
+        board.innerHTML = '';
+        
         const pieces = {
-            '0-0': '♜', '0-7': '♜', '0-1': '♞', '0-6': '♞',
-            '0-2': '♝', '0-5': '♝', '0-3': '♛', '0-4': '♚',
-            '1-0': '♟', '1-1': '♟', '1-2': '♟', '1-3': '♟',
-            '1-4': '♟', '1-5': '♟', '1-6': '♟', '1-7': '♟',
-            '6-0': '♙', '6-1': '♙', '6-2': '♙', '6-3': '♙',
-            '6-4': '♙', '6-5': '♙', '6-6': '♙', '6-7': '♙',
-            '7-0': '♖', '7-7': '♖', '7-1': '♘', '7-6': '♘',
-            '7-2': '♗', '7-5': '♗', '7-3': '♕', '7-4': '♔'
+            '0-0': 'bR', '0-7': 'bR', '0-1': 'bN', '0-6': 'bN',
+            '0-2': 'bB', '0-5': 'bB', '0-3': 'bQ', '0-4': 'bK',
+            '1-0': 'bP', '1-1': 'bP', '1-2': 'bP', '1-3': 'bP',
+            '1-4': 'bP', '1-5': 'bP', '1-6': 'bP', '1-7': 'bP',
+            '6-0': 'wP', '6-1': 'wP', '6-2': 'wP', '6-3': 'wP',
+            '6-4': 'wP', '6-5': 'wP', '6-6': 'wP', '6-7': 'wP',
+            '7-0': 'wR', '7-7': 'wR', '7-1': 'wN', '7-6': 'wN',
+            '7-2': 'wB', '7-5': 'wB', '7-3': 'wQ', '7-4': 'wK'
         };
         
         for (let row = 0; row < 8; row++) {
@@ -467,10 +470,12 @@ const Router = {
                 
                 const key = `${row}-${col}`;
                 if (pieces[key]) {
-                    const piece = document.createElement('span');
-                    piece.className = 'chess-piece';
-                    piece.textContent = pieces[key];
-                    square.appendChild(piece);
+                    const img = document.createElement('img');
+                    img.className = 'chess-piece';
+                    img.src = `assets/pieces/${pieces[key]}.svg`;
+                    img.alt = pieces[key];
+                    img.style.cssText = 'width: 70%; height: 70%; object-fit: contain;';
+                    square.appendChild(img);
                 }
                 
                 board.appendChild(square);
