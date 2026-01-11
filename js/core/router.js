@@ -14,8 +14,12 @@ const PAGES = {
                             From beginner-friendly Nexus-Nano to the powerful Synapse-Base, choose your challenge.
                         </p>
                         <div class="hero-actions">
-                            <a href="#play" class="btn btn-primary btn-lg">Start Playing</a>
-                            <a href="#docs" class="btn btn-secondary btn-lg">Documentation</a>
+                            <a href="#play" class="btn btn-primary btn-lg">
+                                <i class="fas fa-chess"></i> Start Playing
+                            </a>
+                            <a href="#docs" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-book"></i> Documentation
+                            </a>
                         </div>
                         <div class="hero-stats">
                             <div class="stat">
@@ -33,25 +37,7 @@ const PAGES = {
                         </div>
                     </div>
                     <div class="slide-in-right">
-                        <div class="chess-board-preview float-animation">
-                            <svg width="100%" height="100%" viewBox="0 0 100 100">
-                                <g opacity="0.1">
-                                    <line x1="0" y1="25" x2="100" y2="25" stroke="currentColor" stroke-width="1"/>
-                                    <line x1="0" y1="50" x2="100" y2="50" stroke="currentColor" stroke-width="1"/>
-                                    <line x1="0" y1="75" x2="100" y2="75" stroke="currentColor" stroke-width="1"/>
-                                    <line x1="25" y1="0" x2="25" y2="100" stroke="currentColor" stroke-width="1"/>
-                                    <line x1="50" y1="0" x2="50" y2="100" stroke="currentColor" stroke-width="1"/>
-                                    <line x1="75" y1="0" x2="75" y2="100" stroke="currentColor" stroke-width="1"/>
-                                </g>
-                                <g transform="translate(30, 20)" style="color: var(--accent-blue)">
-                                    <path d="M 20 5 L 25 15 L 15 15 Z" fill="currentColor" opacity="0.3"/>
-                                    <circle cx="20" cy="25" r="8" fill="currentColor" opacity="0.6"/>
-                                </g>
-                                <g transform="translate(50, 50)" style="color: var(--accent-cyan)">
-                                    <path d="M 5 15 Q 10 5 15 15 L 12 20 L 8 20 Z" fill="currentColor" opacity="0.4"/>
-                                </g>
-                            </svg>
-                        </div>
+                        <div class="chess-board-preview float-animation" id="heroBoard"></div>
                     </div>
                 </div>
             </div>
@@ -61,36 +47,26 @@ const PAGES = {
             <div class="container">
                 <h2 class="section-title gradient-text">Powerful Features</h2>
                 <div class="features-grid">
-                    <div class="card feature-card scale-in">
+                    <div class="card feature-card scale-in" data-aos="fade-up">
                         <div class="feature-icon">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="currentColor">
-                                <circle cx="16" cy="10" r="3"/>
-                                <circle cx="16" cy="16" r="5" opacity="0.7"/>
-                                <circle cx="16" cy="24" r="7" opacity="0.4"/>
-                            </svg>
+                            <i class="fas fa-brain fa-2x"></i>
                         </div>
                         <h3>Neural Network Engine</h3>
-                        <p>Deep learning models trained on millions of high-quality positions from master games.</p>
+                        <p>Deep learning models trained on millions of high-quality positions from master games for superior strategic understanding.</p>
                     </div>
-                    <div class="card feature-card scale-in" style="animation-delay: 0.1s">
+                    <div class="card feature-card scale-in" data-aos="fade-up" data-aos-delay="100">
                         <div class="feature-icon">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="6" y="6" width="20" height="20" rx="4"/>
-                                <line x1="6" y1="16" x2="26" y2="16"/>
-                                <line x1="16" y1="6" x2="16" y2="26"/>
-                            </svg>
+                            <i class="fas fa-layer-group fa-2x"></i>
                         </div>
                         <h3>Three Difficulty Levels</h3>
-                        <p>Choose from Nano (1600 ELO), Core (2000 ELO), or Base (2200 ELO) engines.</p>
+                        <p>Choose from Nano (1600 ELO), Core (2000 ELO), or Base (2200 ELO) engines tailored to your skill level.</p>
                     </div>
-                    <div class="card feature-card scale-in" style="animation-delay: 0.2s">
+                    <div class="card feature-card scale-in" data-aos="fade-up" data-aos-delay="200">
                         <div class="feature-icon">
-                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M16 6L20 14L28 16L22 22L24 30L16 26L8 30L10 22L4 16L12 14L16 6Z"/>
-                            </svg>
+                            <i class="fas fa-chart-line fa-2x"></i>
                         </div>
                         <h3>Real-time Analysis</h3>
-                        <p>Instant position evaluation with detailed move analysis and principal variations.</p>
+                        <p>Instant position evaluation with detailed move analysis and principal variations for every position.</p>
                     </div>
                 </div>
             </div>
@@ -102,64 +78,53 @@ const PAGES = {
             <div class="container">
                 <div class="play-header">
                     <div>
-                        <h1>Play Against AI</h1>
+                        <h1><i class="fas fa-chess"></i> Play Against AI</h1>
                         <p>Challenge our neural network engines</p>
                     </div>
-                    <button class="btn btn-secondary" onclick="ChessGame.resetGame()">New Game</button>
+                    <button class="btn btn-secondary" onclick="ChessGame.resetGame()">
+                        <i class="fas fa-redo"></i> New Game
+                    </button>
                 </div>
 
                 <div class="play-grid">
                     <aside>
                         <div class="sidebar-card">
-                            <div class="card-header">Select Opponent</div>
+                            <div class="card-header"><i class="fas fa-robot"></i> Select Opponent</div>
                             <button class="model-option" data-model="nano" onclick="ChessGame.selectModel('nano')">
                                 <div>
                                     <strong>Nexus-Nano</strong><br>
-                                    <small>Beginner • ELO ~1600</small>
+                                    <small style="color: var(--accent-green);">Beginner • ELO ~1600</small>
                                 </div>
                             </button>
                             <button class="model-option active" data-model="core" onclick="ChessGame.selectModel('core')">
                                 <div>
                                     <strong>Nexus-Core</strong><br>
-                                    <small>Intermediate • ELO ~2000</small>
+                                    <small style="color: var(--accent-blue);">Intermediate • ELO ~2000</small>
                                 </div>
                             </button>
                             <button class="model-option" data-model="base" onclick="ChessGame.selectModel('base')">
                                 <div>
                                     <strong>Synapse-Base</strong><br>
-                                    <small>Advanced • ELO ~2200</small>
+                                    <small style="color: var(--accent-purple);">Advanced • ELO ~2200</small>
                                 </div>
                             </button>
-                        </div>
-
-                        <div class="sidebar-card">
-                            <div class="card-header">Settings</div>
-                            <div style="padding: 1rem;">
-                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Your Color</label>
-                                <button class="btn btn-sm btn-secondary" onclick="ChessGame.setColor('white')" style="margin-right: 0.5rem;">White</button>
-                                <button class="btn btn-sm btn-outline" onclick="ChessGame.setColor('black')">Black</button>
-                            </div>
                         </div>
                     </aside>
 
                     <div>
                         <div class="board-wrapper">
                             <div id="chessboard"></div>
-                            <div class="board-overlay" id="thinkingOverlay">
-                                <div style="text-align: center; color: white;">
-                                    <div class="spinner"></div>
-                                    <p style="margin-top: 1rem;">AI is thinking...</p>
-                                </div>
-                            </div>
                         </div>
 
-                        <div class="card" style="margin-top: 1rem; padding: 1rem;">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="card" style="margin-top: 1.5rem; padding: 1.5rem;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
                                 <div>
-                                    <strong>Status:</strong> <span id="gameStatus">Your move</span>
+                                    <strong style="color: var(--text-secondary); font-size: 0.875rem;">STATUS</strong>
+                                    <p id="gameStatus" style="margin-top: 0.5rem; font-size: 1.125rem; color: var(--text-primary);">Your move</p>
                                 </div>
                                 <div>
-                                    <strong>Evaluation:</strong> <span id="evaluation">0.00</span>
+                                    <strong style="color: var(--text-secondary); font-size: 0.875rem;">EVALUATION</strong>
+                                    <p id="evaluation" style="margin-top: 0.5rem; font-size: 1.125rem; color: var(--accent-blue);">0.00</p>
                                 </div>
                             </div>
                         </div>
@@ -167,59 +132,180 @@ const PAGES = {
 
                     <aside>
                         <div class="sidebar-card">
-                            <div class="card-header">Move History</div>
-                            <div class="move-history" id="moveHistory"></div>
+                            <div class="card-header"><i class="fas fa-history"></i> Move History</div>
+                            <div class="move-history-container">
+                                <table class="pgn-table" id="moveHistoryTable">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50px;">#</th>
+                                            <th>White</th>
+                                            <th>Black</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="moveHistory"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </aside>
+                </div>
+            </div>
+            
+            <div class="thinking-indicator" id="thinkingIndicator">
+                <div class="spinner spinner-sm"></div>
+                <span><strong>AI is thinking...</strong></span>
+            </div>
+            
+            <div class="color-selection-modal active" id="colorModal">
+                <div class="color-modal-content scale-in">
+                    <h2>Choose Your Color</h2>
+                    <p>Select which color you want to play as</p>
+                    <div class="color-options">
+                        <div class="color-option white" onclick="ChessGame.startGame('white')">
+                            <i class="fas fa-chess-king"></i>
+                            <h3>White</h3>
+                            <p>Play first</p>
+                        </div>
+                        <div class="color-option black" onclick="ChessGame.startGame('black')">
+                            <i class="fas fa-chess-king"></i>
+                            <h3>Black</h3>
+                            <p>AI plays first</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `,
+
+    arena: `
+        <div class="arena-page fade-in">
+            <div class="container">
+                <div class="arena-header text-center" style="margin-bottom: 4rem;">
+                    <h1 class="section-title gradient-text"><i class="fas fa-trophy"></i> Engine Arena</h1>
+                    <p style="color: var(--text-secondary); font-size: 1.125rem; max-width: 700px; margin: 0 auto;">
+                        Watch our AI engines compete against each other with detailed benchmarks and statistics
+                    </p>
+                </div>
+
+                <div class="arena-controls card" style="padding: 2rem; margin-bottom: 2rem;">
+                    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: space-between;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">White Engine</label>
+                            <select id="whiteEngine" class="form-select" style="background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border); padding: 0.75rem; border-radius: var(--radius-md);">
+                                <option value="nano">Nexus-Nano</option>
+                                <option value="core" selected>Nexus-Core</option>
+                                <option value="base">Synapse-Base</option>
+                            </select>
+                        </div>
+                        <div style="text-align: center;">
+                            <i class="fas fa-exchange-alt fa-2x" style="color: var(--accent-blue);"></i>
+                        </div>
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Black Engine</label>
+                            <select id="blackEngine" class="form-select" style="background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border); padding: 0.75rem; border-radius: var(--radius-md);">
+                                <option value="nano">Nexus-Nano</option>
+                                <option value="core">Nexus-Core</option>
+                                <option value="base" selected>Synapse-Base</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary btn-lg" onclick="Arena.startMatch()">
+                            <i class="fas fa-play"></i> Start Match
+                        </button>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 380px; gap: 2rem; align-items: start;">
+                    <div>
+                        <div class="card" style="padding: 2rem; margin-bottom: 1.5rem;">
+                            <div style="text-align: center; margin-bottom: 1.5rem;">
+                                <h3 id="whitePlayerName" style="color: var(--text-primary);">Nexus-Core</h3>
+                                <span class="badge badge-info">White</span>
+                            </div>
+                            <div id="arenaBoard"></div>
+                            <div style="text-align: center; margin-top: 1.5rem;">
+                                <h3 id="blackPlayerName" style="color: var(--text-primary);">Synapse-Base</h3>
+                                <span class="badge badge-info">Black</span>
+                            </div>
+                        </div>
+
+                        <div class="card" style="padding: 1.5rem;">
+                            <h4 style="margin-bottom: 1rem;"><i class="fas fa-info-circle"></i> Match Status</h4>
+                            <div id="arenaStatus" style="color: var(--text-secondary);">
+                                Select engines and start the match
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="card" style="padding: 1.5rem; margin-bottom: 1.5rem;">
+                            <h4 style="margin-bottom: 1.5rem;"><i class="fas fa-chart-bar"></i> Live Benchmarks</h4>
+                            <div id="benchmarkStats"></div>
+                        </div>
+
+                        <div class="card" style="padding: 1.5rem;">
+                            <h4 style="margin-bottom: 1rem;"><i class="fas fa-list"></i> Move Log</h4>
+                            <div id="arenaMoveLog" style="max-height: 400px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.875rem;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     `,
 
     models: `
-        <div class="container fade-in" style="padding: 4rem 0;">
-            <h1 class="section-title">Chess AI Models</h1>
-            <div class="models-grid">
-                <div class="card model-card">
-                    <div class="model-badge beginner">Beginner</div>
-                    <h2>Nexus-Nano</h2>
-                    <p>Perfect for learning and casual play</p>
-                    <ul class="model-specs">
-                        <li>Model Size: 13 MB</li>
-                        <li>Search Depth: 4</li>
-                        <li>Training Data: 638K positions</li>
-                        <li>ELO Rating: ~1600</li>
-                        <li>Response Time: <2s</li>
-                    </ul>
-                    <button class="btn btn-primary" onclick="Router.navigate('play'); setTimeout(() => ChessGame.selectModel('nano'), 100)">Play Now</button>
-                </div>
+        <div class="models-page fade-in">
+            <div class="container">
+                <h1 class="section-title text-center gradient-text">Chess AI Models</h1>
+                <p class="text-center" style="color: var(--text-secondary); font-size: 1.125rem; max-width: 700px; margin: 0 auto 4rem;">
+                    Three powerful neural network engines designed for different skill levels
+                </p>
+                <div class="models-grid">
+                    <div class="card model-card" data-aos="fade-up">
+                        <div class="model-badge beginner">Beginner Friendly</div>
+                        <h2>Nexus-Nano</h2>
+                        <p>Perfect for learning and casual play with fast response times</p>
+                        <ul class="model-specs">
+                            <li><span>Model Size:</span> <strong>13 MB</strong></li>
+                            <li><span>Search Depth:</span> <strong>4 plies</strong></li>
+                            <li><span>Training Data:</span> <strong>638K positions</strong></li>
+                            <li><span>ELO Rating:</span> <strong>~1600</strong></li>
+                            <li><span>Response Time:</span> <strong>&lt;2 seconds</strong></li>
+                        </ul>
+                        <button class="btn btn-primary w-100" onclick="Router.navigate('play'); setTimeout(() => ChessGame.selectModel('nano'), 100)">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
+                    </div>
 
-                <div class="card model-card">
-                    <div class="model-badge intermediate">Intermediate</div>
-                    <h2>Nexus-Core</h2>
-                    <p>Balanced power and performance</p>
-                    <ul class="model-specs">
-                        <li>Model Size: 13 MB</li>
-                        <li>Search Depth: 5</li>
-                        <li>Training Data: 2.5M positions</li>
-                        <li>ELO Rating: ~2000</li>
-                        <li>Response Time: <3s</li>
-                    </ul>
-                    <button class="btn btn-primary" onclick="Router.navigate('play'); setTimeout(() => ChessGame.selectModel('core'), 100)">Play Now</button>
-                </div>
+                    <div class="card model-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="model-badge intermediate">Intermediate</div>
+                        <h2>Nexus-Core</h2>
+                        <p>Balanced power and performance for competitive players</p>
+                        <ul class="model-specs">
+                            <li><span>Model Size:</span> <strong>13 MB</strong></li>
+                            <li><span>Search Depth:</span> <strong>5 plies</strong></li>
+                            <li><span>Training Data:</span> <strong>2.5M positions</strong></li>
+                            <li><span>ELO Rating:</span> <strong>~2000</strong></li>
+                            <li><span>Response Time:</span> <strong>&lt;3 seconds</strong></li>
+                        </ul>
+                        <button class="btn btn-primary w-100" onclick="Router.navigate('play'); setTimeout(() => ChessGame.selectModel('core'), 100)">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
+                    </div>
 
-                <div class="card model-card">
-                    <div class="model-badge advanced">Advanced</div>
-                    <h2>Synapse-Base</h2>
-                    <p>Maximum strength with hybrid architecture</p>
-                    <ul class="model-specs">
-                        <li>Model Size: 145 MB</li>
-                        <li>Parameters: 38M</li>
-                        <li>Architecture: CNN + Transformer</li>
-                        <li>Training Data: 2.5M positions</li>
-                        <li>ELO Rating: ~2200</li>
-                    </ul>
-                    <button class="btn btn-primary" onclick="Router.navigate('play'); setTimeout(() => ChessGame.selectModel('base'), 100)">Play Now</button>
+                    <div class="card model-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="model-badge advanced">Advanced</div>
+                        <h2>Synapse-Base</h2>
+                        <p>Maximum strength with hybrid CNN + Transformer architecture</p>
+                        <ul class="model-specs">
+                            <li><span>Model Size:</span> <strong>145 MB</strong></li>
+                            <li><span>Parameters:</span> <strong>38 Million</strong></li>
+                            <li><span>Architecture:</span> <strong>CNN + Transformer</strong></li>
+                            <li><span>Training Data:</span> <strong>2.5M positions</strong></li>
+                            <li><span>ELO Rating:</span> <strong>~2200</strong></li>
+                        </ul>
+                        <button class="btn btn-primary w-100" onclick="Router.navigate('play'); setTimeout(() => ChessGame.selectModel('base'), 100)">
+                            <i class="fas fa-play"></i> Play Now
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -229,7 +315,10 @@ const PAGES = {
         <div class="docs-page fade-in">
             <div class="container">
                 <div class="docs-content card" id="docsContent">
-                    <h1>Loading documentation...</h1>
+                    <div style="text-align: center; padding: 3rem;">
+                        <div class="spinner"></div>
+                        <p style="margin-top: 1rem; color: var(--text-secondary);">Loading documentation...</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -239,7 +328,10 @@ const PAGES = {
         <div class="api-page fade-in">
             <div class="container">
                 <div class="docs-content card" id="apiContent">
-                    <h1>Loading API documentation...</h1>
+                    <div style="text-align: center; padding: 3rem;">
+                        <div class="spinner"></div>
+                        <p style="margin-top: 1rem; color: var(--text-secondary);">Loading API documentation...</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -248,40 +340,66 @@ const PAGES = {
     status: `
         <div class="status-page fade-in">
             <div class="container">
-                <h1 class="section-title">System Status</h1>
-                <p class="text-center" style="color: var(--text-secondary); margin-bottom: 3rem;">Real-time monitoring of all services</p>
+                <h1 class="section-title text-center gradient-text">System Status</h1>
+                <p class="text-center" style="color: var(--text-secondary); margin-bottom: 4rem; font-size: 1.125rem;">
+                    Real-time monitoring of all services
+                </p>
                 
                 <div class="status-grid">
-                    <div class="status-card">
+                    <div class="status-card" data-aos="fade-up">
                         <div class="status-header">
-                            <h3>Nexus-Nano</h3>
-                            <span class="badge badge-info" id="nanoStatus">Checking...</span>
+                            <h3><i class="fas fa-server"></i> Nexus-Nano</h3>
+                            <span class="badge badge-info" id="nanoStatus">
+                                <i class="fas fa-circle-notch fa-spin"></i> Checking...
+                            </span>
                         </div>
                         <div class="status-info">
-                            <p>Latency: <span id="nanoLatency">-</span></p>
-                            <p>Endpoint: ${CONFIG.API.NANO}</p>
+                            <div>
+                                <strong>Latency</strong>
+                                <p id="nanoLatency">-</p>
+                            </div>
+                            <div>
+                                <strong>Endpoint</strong>
+                                <p style="font-size: 0.8125rem; word-break: break-all;">${CONFIG.API.NANO.split('//')[1]}</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="status-card">
+                    <div class="status-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="status-header">
-                            <h3>Nexus-Core</h3>
-                            <span class="badge badge-info" id="coreStatus">Checking...</span>
+                            <h3><i class="fas fa-server"></i> Nexus-Core</h3>
+                            <span class="badge badge-info" id="coreStatus">
+                                <i class="fas fa-circle-notch fa-spin"></i> Checking...
+                            </span>
                         </div>
                         <div class="status-info">
-                            <p>Latency: <span id="coreLatency">-</span></p>
-                            <p>Endpoint: ${CONFIG.API.CORE}</p>
+                            <div>
+                                <strong>Latency</strong>
+                                <p id="coreLatency">-</p>
+                            </div>
+                            <div>
+                                <strong>Endpoint</strong>
+                                <p style="font-size: 0.8125rem; word-break: break-all;">${CONFIG.API.CORE.split('//')[1]}</p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="status-card">
+                    <div class="status-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="status-header">
-                            <h3>Synapse-Base</h3>
-                            <span class="badge badge-info" id="baseStatus">Checking...</span>
+                            <h3><i class="fas fa-server"></i> Synapse-Base</h3>
+                            <span class="badge badge-info" id="baseStatus">
+                                <i class="fas fa-circle-notch fa-spin"></i> Checking...
+                            </span>
                         </div>
                         <div class="status-info">
-                            <p>Latency: <span id="baseLatency">-</span></p>
-                            <p>Endpoint: ${CONFIG.API.BASE}</p>
+                            <div>
+                                <strong>Latency</strong>
+                                <p id="baseLatency">-</p>
+                            </div>
+                            <div>
+                                <strong>Endpoint</strong>
+                                <p style="font-size: 0.8125rem; word-break: break-all;">${CONFIG.API.BASE.split('//')[1]}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -308,8 +426,16 @@ const Router = {
     render(page) {
         $('#app').html(PAGES[page] || PAGES.home);
         
-        if (page === 'play') {
+        if (typeof AOS !== 'undefined') {
+            AOS.refresh();
+        }
+        
+        if (page === 'home') {
+            setTimeout(() => this.renderHeroBoard(), 100);
+        } else if (page === 'play') {
             setTimeout(() => ChessGame.init(), 100);
+        } else if (page === 'arena') {
+            setTimeout(() => Arena.init(), 100);
         } else if (page === 'docs') {
             this.loadDocs();
         } else if (page === 'api') {
@@ -318,26 +444,53 @@ const Router = {
             setTimeout(() => StatusMonitor.checkAll(), 100);
         }
     },
+    
+    renderHeroBoard() {
+        const board = document.getElementById('heroBoard');
+        if (!board) return;
+        
+        const pieces = {
+            '0-0': '♜', '0-7': '♜', '0-1': '♞', '0-6': '♞',
+            '0-2': '♝', '0-5': '♝', '0-3': '♛', '0-4': '♚',
+            '1-0': '♟', '1-1': '♟', '1-2': '♟', '1-3': '♟',
+            '1-4': '♟', '1-5': '♟', '1-6': '♟', '1-7': '♟',
+            '6-0': '♙', '6-1': '♙', '6-2': '♙', '6-3': '♙',
+            '6-4': '♙', '6-5': '♙', '6-6': '♙', '6-7': '♙',
+            '7-0': '♖', '7-7': '♖', '7-1': '♘', '7-6': '♘',
+            '7-2': '♗', '7-5': '♗', '7-3': '♕', '7-4': '♔'
+        };
+        
+        for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+                const square = document.createElement('div');
+                square.className = `board-square ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
+                
+                const key = `${row}-${col}`;
+                if (pieces[key]) {
+                    const piece = document.createElement('span');
+                    piece.className = 'chess-piece';
+                    piece.textContent = pieces[key];
+                    square.appendChild(piece);
+                }
+                
+                board.appendChild(square);
+            }
+        }
+    },
 
     loadDocs() {
-        fetch(CONFIG.DOCS.GETTING_STARTED)
-            .then(res => res.text())
-            .then(md => {
-                $('#docsContent').html(marked.parse(md));
-            })
-            .catch(() => {
-                $('#docsContent').html('<h1>Documentation Coming Soon</h1>');
-            });
+        if (typeof MarkdownRenderer !== 'undefined') {
+            MarkdownRenderer.loadMarkdown(CONFIG.DOCS.GETTING_STARTED, 'docsContent');
+        } else {
+            $('#docsContent').html('<h1>Documentation Coming Soon</h1><p>Check back later for comprehensive documentation.</p>');
+        }
     },
 
     loadApiDocs() {
-        fetch(CONFIG.DOCS.API_REFERENCE)
-            .then(res => res.text())
-            .then(md => {
-                $('#apiContent').html(marked.parse(md));
-            })
-            .catch(() => {
-                $('#apiContent').html('<h1>API Documentation Coming Soon</h1>');
-            });
+        if (typeof MarkdownRenderer !== 'undefined') {
+            MarkdownRenderer.loadMarkdown(CONFIG.DOCS.API_REFERENCE, 'apiContent');
+        } else {
+            $('#apiContent').html('<h1>API Documentation Coming Soon</h1><p>Check back later for API reference.</p>');
+        }
     }
 };
