@@ -16,13 +16,29 @@ const Arena = {
         
         const config = {
             draggable: false,
-            position: 'start'
+            position: 'start',
+            pieceTheme: function(piece) {
+                return 'assets/pieces/' + piece + '.svg';
+            }
         };
         
         this.board = Chessboard('arenaBoard', config);
         
         $(window).resize(() => {
             if (this.board) this.board.resize();
+        });
+        
+        // Initialize engine selections
+        this.whiteEngine = $('#whiteEngine').val() || 'core';
+        this.blackEngine = $('#blackEngine').val() || 'base';
+        
+        // Add change listeners
+        $('#whiteEngine').on('change', (e) => {
+            this.whiteEngine = e.target.value;
+        });
+        
+        $('#blackEngine').on('change', (e) => {
+            this.blackEngine = e.target.value;
         });
         
         this.updateBenchmarks();
