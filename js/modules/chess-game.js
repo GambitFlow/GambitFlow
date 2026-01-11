@@ -22,7 +22,10 @@ const ChessGame = {
             onDragStart: this.onDragStart.bind(this),
             onDrop: this.onDrop.bind(this),
             onSnapEnd: this.onSnapEnd.bind(this),
-            orientation: color
+            orientation: color,
+            pieceTheme: function(piece) {
+                return 'assets/pieces/' + piece + '.svg';
+            }
         };
         
         STATE.board = Chessboard('chessboard', config);
