@@ -202,28 +202,37 @@ $(document).ready(function() {
     
     // Initialize GSAP animations if available
     if (typeof gsap !== 'undefined') {
-        gsap.from('.hero-title', {
-            duration: 1,
-            y: 50,
-            opacity: 0,
-            ease: 'power3.out'
-        });
-        
-        gsap.from('.hero-description', {
-            duration: 1,
-            y: 30,
-            opacity: 0,
-            delay: 0.2,
-            ease: 'power3.out'
-        });
-        
-        gsap.from('.hero-actions', {
-            duration: 1,
-            y: 30,
-            opacity: 0,
-            delay: 0.4,
-            ease: 'power3.out'
-        });
+        // Wait for DOM to be fully loaded
+        setTimeout(() => {
+            if ($('.hero-title').length) {
+                gsap.from('.hero-title', {
+                    duration: 1,
+                    y: 50,
+                    opacity: 0,
+                    ease: 'power3.out'
+                });
+            }
+            
+            if ($('.hero-description').length) {
+                gsap.from('.hero-description', {
+                    duration: 1,
+                    y: 30,
+                    opacity: 0,
+                    delay: 0.2,
+                    ease: 'power3.out'
+                });
+            }
+            
+            if ($('.hero-actions').length) {
+                gsap.from('.hero-actions', {
+                    duration: 1,
+                    y: 30,
+                    opacity: 0,
+                    delay: 0.4,
+                    ease: 'power3.out'
+                });
+            }
+        }, 100);
     }
     
     console.log('✅ GambitFlow initialized successfully');
