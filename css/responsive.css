@@ -36,8 +36,13 @@
     }
     
     .hero-visual {
-        max-width: 500px;
+        max-width: 400px;
         margin: 0 auto;
+    }
+    
+    .chess-board-preview {
+        max-width: 100%;
+        padding: 1rem;
     }
     
     .play-grid {
@@ -295,6 +300,17 @@
     
     #chessboard {
         width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .board-wrapper {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .chess-board-preview {
+        max-width: 100%;
+        padding: 0.75rem;
     }
     
     .pgn-table th,
