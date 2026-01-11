@@ -90,15 +90,15 @@
     width: 100%;
     max-width: 520px;
     aspect-ratio: 1;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(6, 182, 212, 0.08));
+    background: linear-gradient(135deg, rgba(79, 158, 255, 0.1), rgba(34, 211, 238, 0.1));
     border: 2px solid var(--border-light);
     border-radius: var(--radius-2xl);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(79, 158, 255, 0.2);
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(8, 1fr);
     padding: 1.5rem;
-    gap: 2px;
+    gap: 3px;
     position: relative;
     overflow: hidden;
     margin: 0 auto;
@@ -107,32 +107,44 @@
 .chess-board-preview::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, transparent, rgba(59, 130, 246, 0.1));
+    inset: -2px;
+    background: linear-gradient(45deg, rgba(79, 158, 255, 0.3), transparent, rgba(34, 211, 238, 0.3));
+    border-radius: var(--radius-2xl);
+    opacity: 0.5;
     pointer-events: none;
+    animation: borderRotate 4s linear infinite;
+}
+
+@keyframes borderRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .board-square {
-    border-radius: 4px;
+    border-radius: 6px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.3s ease;
 }
 
-.board-square.light { background: rgba(240, 240, 250, 0.15); }
-.board-square.dark { background: rgba(59, 130, 246, 0.25); }
+.board-square.light { 
+    background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+}
+
+.board-square.dark { 
+    background: linear-gradient(135deg, #5c6bc0 0%, #3f51b5 100%);
+}
 
 .chess-piece {
-    font-size: 2rem;
-    opacity: 0.9;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
 }
 
 /* Features Section */
 .features {
     padding: 8rem 0;
-    background: var(--bg-secondary);
+    background: var(--bg-primary);
     position: relative;
 }
 
@@ -142,6 +154,7 @@
     margin-bottom: 5rem;
     font-weight: 800;
     letter-spacing: -0.03em;
+    color: var(--text-primary);
 }
 
 .features-grid {
@@ -160,13 +173,14 @@
     justify-content: center;
     margin-bottom: 1.75rem;
     color: white;
-    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 8px 24px rgba(79, 158, 255, 0.4);
 }
 
 .feature-card h3 {
     font-size: 1.625rem;
     margin-bottom: 1rem;
     font-weight: 700;
+    color: var(--text-primary);
 }
 
 .feature-card p {
@@ -422,6 +436,7 @@
 /* Models Page */
 .models-page {
     padding: 5rem 0;
+    background: var(--bg-primary);
 }
 
 .models-grid {
@@ -434,7 +449,7 @@
 .model-card {
     padding: 2.75rem;
     background: var(--bg-card);
-    border: 2px solid var(--border);
+    border: 2px solid var(--border-light);
     border-radius: var(--radius-2xl);
     position: relative;
 }
@@ -451,26 +466,27 @@
 }
 
 .model-badge.beginner {
-    background: rgba(16, 185, 129, 0.2);
+    background: rgba(34, 197, 94, 0.2);
     color: var(--accent-green);
-    border: 1px solid rgba(16, 185, 129, 0.4);
+    border: 1px solid rgba(34, 197, 94, 0.5);
 }
 
 .model-badge.intermediate {
-    background: rgba(59, 130, 246, 0.2);
+    background: rgba(79, 158, 255, 0.2);
     color: var(--accent-blue);
-    border: 1px solid rgba(59, 130, 246, 0.4);
+    border: 1px solid rgba(79, 158, 255, 0.5);
 }
 
 .model-badge.advanced {
-    background: rgba(139, 92, 246, 0.2);
+    background: rgba(167, 139, 250, 0.2);
     color: var(--accent-purple);
-    border: 1px solid rgba(139, 92, 246, 0.4);
+    border: 1px solid rgba(167, 139, 250, 0.5);
 }
 
 .model-card h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
+    color: var(--text-primary);
 }
 
 .model-card > p {
@@ -486,11 +502,14 @@
 }
 
 .model-specs li {
-    padding: 0.75rem 0;
+    padding: 0.875rem 1rem;
     border-bottom: 1px solid var(--border);
     display: flex;
     justify-content: space-between;
     font-size: 0.9375rem;
+    background: rgba(255, 255, 255, 0.02);
+    margin-bottom: 0.5rem;
+    border-radius: var(--radius-sm);
 }
 
 .model-specs li:last-child {
@@ -499,12 +518,14 @@
 
 .model-specs strong {
     color: var(--text-primary);
+    font-weight: 600;
 }
 
 /* Docs & API Pages */
 .docs-page,
 .api-page {
     padding: 5rem 0;
+    background: var(--bg-primary);
 }
 
 .docs-content {
@@ -512,20 +533,25 @@
     margin: 0 auto;
     padding: 3rem;
     line-height: 1.8;
+    background: var(--bg-card);
+    border: 2px solid var(--border-light);
+    border-radius: var(--radius-2xl);
 }
 
 .docs-content h1 {
     font-size: 3rem;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid var(--border);
+    border-bottom: 3px solid var(--border-light);
+    color: var(--text-primary);
 }
 
 .docs-content h2 {
     margin-top: 3rem;
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid var(--border);
+    color: var(--text-primary);
 }
 
 .docs-content h3 {
@@ -546,17 +572,18 @@
     border-radius: var(--radius-lg);
     overflow-x: auto;
     margin: 1.5rem 0;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
+    border: 2px solid var(--border);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .docs-content code {
     background: var(--bg-tertiary);
-    padding: 0.25rem 0.5rem;
+    padding: 0.3rem 0.6rem;
     border-radius: var(--radius-sm);
     font-size: 0.9em;
     color: var(--accent-cyan);
     border: 1px solid var(--border);
+    font-weight: 500;
 }
 
 .docs-content pre code {
@@ -581,11 +608,13 @@
 .docs-content a {
     color: var(--accent-blue);
     text-decoration: underline;
-    text-decoration-color: rgba(59, 130, 246, 0.3);
+    text-decoration-color: rgba(79, 158, 255, 0.4);
+    font-weight: 500;
 }
 
 .docs-content a:hover {
     text-decoration-color: var(--accent-blue);
+    color: var(--accent-cyan);
 }
 
 .docs-content blockquote {
@@ -594,6 +623,9 @@
     margin: 1.5rem 0;
     color: var(--text-secondary);
     font-style: italic;
+    background: rgba(79, 158, 255, 0.05);
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius-md);
 }
 
 .docs-content table {
@@ -601,9 +633,10 @@
     border-collapse: separate;
     border-spacing: 0;
     margin: 2rem 0;
-    border: 1px solid var(--border);
+    border: 2px solid var(--border-light);
     border-radius: var(--radius-lg);
     overflow: hidden;
+    background: var(--bg-tertiary);
 }
 
 .docs-content th,
@@ -614,9 +647,16 @@
 }
 
 .docs-content th {
-    background: var(--bg-tertiary);
+    background: var(--bg-secondary);
     font-weight: 600;
     color: var(--text-primary);
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+}
+
+.docs-content td {
+    color: var(--text-secondary);
 }
 
 .docs-content tr:last-child td {
@@ -624,12 +664,13 @@
 }
 
 .docs-content tr:hover {
-    background: rgba(59, 130, 246, 0.05);
+    background: rgba(79, 158, 255, 0.08);
 }
 
 /* Status Page */
 .status-page {
     padding: 5rem 0;
+    background: var(--bg-primary);
 }
 
 .status-grid {
@@ -640,16 +681,17 @@
 .status-card {
     padding: 2rem;
     background: var(--bg-card);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border-light);
     border-radius: var(--radius-xl);
     margin-bottom: 1.5rem;
     transition: var(--transition);
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .status-card:hover {
     border-color: var(--accent-blue);
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 8px 32px rgba(79, 158, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 .status-header {
@@ -661,6 +703,7 @@
 
 .status-header h3 {
     font-size: 1.5rem;
+    color: var(--text-primary);
 }
 
 .status-info {
@@ -668,7 +711,14 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--border);
+    border-top: 2px solid var(--border);
+}
+
+.status-info > div {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
 }
 
 .status-info p {
@@ -680,7 +730,11 @@
 .status-info strong {
     color: var(--text-primary);
     display: block;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 /* Arena Page Styles */
