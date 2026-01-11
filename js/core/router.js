@@ -37,7 +37,17 @@ const PAGES = {
                         </div>
                     </div>
                     <div class="slide-in-right">
-                        <div class="chess-board-preview float-animation" id="heroBoard"></div>
+                        <div style="position: relative;">
+                            <svg style="position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; opacity: 0.15; z-index: 0;" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent-blue);"/>
+                                <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent-cyan);"/>
+                                <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--accent-blue);"/>
+                            </svg>
+                            <svg style="position: absolute; bottom: -30px; left: -30px; width: 100px; height: 100px; opacity: 0.12; z-index: 0;" viewBox="0 0 100 100">
+                                <path d="M50 10 L90 90 L10 90 Z" fill="none" stroke="currentColor" stroke-width="3" style="color: var(--accent-cyan);"/>
+                            </svg>
+                            <div class="chess-board-preview" id="heroBoard"></div>
+                        </div>
                     </div>
                 </div>
             </div>
