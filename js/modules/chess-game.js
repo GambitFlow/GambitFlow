@@ -1,7 +1,19 @@
 // Chess Game Module
 const ChessGame = {
+    gameStarted: false,
+    
     // Initialize chess game
     init() {
+        this.gameStarted = false;
+        $('#colorModal').addClass('active');
+    },
+    
+    // Start game with selected color
+    startGame(color) {
+        STATE.playerColor = color;
+        this.gameStarted = true;
+        $('#colorModal').removeClass('active');
+        
         STATE.game = new Chess();
         
         const config = {
@@ -10,29 +22,32 @@ const ChessGame = {
             onDragStart: this.onDragStart.bind(this),
             onDrop: this.onDrop.bind(this),
             onSnapEnd: this.onSnapEnd.bind(this),
-            pieceTheme: (piece) => {
-                return `${CONFIG.CHESS.PIECE_PATH}/${piece}.svg`;
-            }
+            orientation: color
         };
         
         STATE.board = Chessboard('chessboard', config);
+        
+        $(window).resize(() => {
+            if (STATE.board) STATE.board.resize();
+        });
+        
         this.updateStatus();
         this.updateMoveHistory();
+        
+        if (color === 'black') {
+            setTimeout(() => this.makeAIMove(), 800);
+        }
     },
 
     // Handle drag start
     onDragStart(source, piece) {
-        // Game over
+        if (!this.gameStarted) return false;
         if (STATE.game.game_over()) return false;
-        
-        // AI is thinking
         if (STATE.isThinking) return false;
         
-        // Check if it's player's turn
         const playerTurn = STATE.playerColor === 'white' ? 'w' : 'b';
         if (STATE.game.turn() !== playerTurn) return false;
         
-        // Only allow dragging player's pieces
         if ((STATE.game.turn() === 'w' && piece.search(/^b/) !== -1) ||
             (STATE.game.turn() === 'b' && piece.search(/^w/) !== -1)) {
             return false;
@@ -41,21 +56,17 @@ const ChessGame = {
 
     // Handle piece drop
     onDrop(source, target) {
-        // Try to make the move
         const move = STATE.game.move({
             from: source,
             to: target,
-            promotion: 'q' // Always promote to queen for simplicity
+            promotion: 'q'
         });
         
-        // Invalid move
         if (move === null) return 'snapback';
         
-        // Update UI
         this.updateStatus();
         this.updateMoveHistory();
         
-        // Make AI move if game is not over
         if (!STATE.game.game_over()) {
             setTimeout(() => this.makeAIMove(), 500);
         }
@@ -71,60 +82,67 @@ const ChessGame = {
         if (STATE.isThinking || STATE.game.game_over()) return;
         
         STATE.isThinking = true;
-        $('#thinkingOverlay').addClass('active');
+        $('#thinkingIndicator').addClass('active');
         
         try {
             const result = await APIClient.getMove(STATE.game.fen(), STATE.currentModel);
             
             if (result.success && result.data.best_move) {
-                // Make the AI move
                 STATE.game.move(result.data.best_move, { sloppy: true });
                 STATE.board.position(STATE.game.fen());
                 
-                // Update evaluation
                 if (result.data.evaluation !== undefined) {
                     STATE.lastEvaluation = result.data.evaluation;
                     $('#evaluation').text(APIClient.formatEvaluation(result.data.evaluation));
                 }
                 
-                // Update UI
                 this.updateStatus();
                 this.updateMoveHistory();
             } else {
-                alert('Error: Could not get AI move. Please try again.');
+                this.showError('Could not get AI move. Please try again.');
             }
             
         } catch (error) {
             console.error('AI Move Error:', error);
-            alert('Error communicating with AI. Please try again.');
+            this.showError('Error communicating with AI. Please try again.');
         } finally {
             STATE.isThinking = false;
-            $('#thinkingOverlay').removeClass('active');
+            $('#thinkingIndicator').removeClass('active');
         }
     },
 
     // Update game status
     updateStatus() {
         let status = 'Your move';
+        let statusColor = 'var(--text-primary)';
         
         if (STATE.game.in_checkmate()) {
-            status = STATE.game.turn() === 'w' ? 'Black wins by checkmate!' : 'White wins by checkmate!';
+            status = STATE.game.turn() === 'w' ? '🏆 Black wins by checkmate!' : '🏆 White wins by checkmate!';
+            statusColor = 'var(--accent-green)';
         } else if (STATE.game.in_draw()) {
-            status = 'Game drawn';
+            status = '🤝 Game drawn';
+            statusColor = 'var(--accent-orange)';
         } else if (STATE.game.in_stalemate()) {
-            status = 'Game drawn by stalemate';
+            status = '🤝 Game drawn by stalemate';
+            statusColor = 'var(--accent-orange)';
         } else if (STATE.game.in_threefold_repetition()) {
-            status = 'Game drawn by threefold repetition';
+            status = '🤝 Game drawn by repetition';
+            statusColor = 'var(--accent-orange)';
         } else if (STATE.game.insufficient_material()) {
-            status = 'Game drawn by insufficient material';
+            status = '🤝 Game drawn by insufficient material';
+            statusColor = 'var(--accent-orange)';
         } else if (STATE.game.in_check()) {
-            status = 'Check!';
+            status = '⚠️ Check!';
+            statusColor = 'var(--accent-red)';
+        } else if (STATE.isThinking) {
+            status = '🤖 AI is thinking...';
+            statusColor = 'var(--accent-blue)';
         }
         
-        $('#gameStatus').text(status);
+        $('#gameStatus').text(status).css('color', statusColor);
     },
 
-    // Update move history
+    // Update move history with PGN table
     updateMoveHistory() {
         const history = STATE.game.history();
         let html = '';
@@ -134,13 +152,17 @@ const ChessGame = {
             const white = history[i];
             const black = history[i + 1] || '';
             
-            html += `<div style="padding: 0.25rem 0;">
-                <strong>${moveNum}.</strong> ${white} ${black}
-            </div>`;
+            html += `<tr>
+                <td class="move-num">${moveNum}</td>
+                <td class="move-white">${white}</td>
+                <td class="move-black">${black}</td>
+            </tr>`;
         }
         
         $('#moveHistory').html(html);
-        $('#moveHistory').scrollTop($('#moveHistory')[0].scrollHeight);
+        
+        const container = $('.move-history-container');
+        container.scrollTop(container[0].scrollHeight);
     },
 
     // Select AI model
@@ -151,42 +173,44 @@ const ChessGame = {
         $(`.model-option[data-model="${model}"]`).addClass('active');
     },
 
-    // Set player color
-    setColor(color) {
-        STATE.playerColor = color;
-        
-        if (STATE.board) {
-            STATE.board.orientation(color);
-        }
-        
-        // If player chose black, make AI move first
-        if (color === 'black' && STATE.game && !STATE.isThinking) {
-            setTimeout(() => this.makeAIMove(), 500);
-        }
-    },
-
     // Reset game
     resetGame() {
-        if (STATE.game) {
+        if (!this.gameStarted) {
+            this.init();
+            return;
+        }
+        
+        if (confirm('Are you sure you want to start a new game?')) {
             STATE.game.reset();
-        }
-        
-        if (STATE.board) {
             STATE.board.start();
+            STATE.isThinking = false;
+            STATE.lastEvaluation = 0;
+            
+            this.updateStatus();
+            this.updateMoveHistory();
+            
+            $('#evaluation').text('0.00');
+            $('#thinkingIndicator').removeClass('active');
+            
+            if (STATE.playerColor === 'black') {
+                setTimeout(() => this.makeAIMove(), 800);
+            }
         }
+    },
+    
+    showError(message) {
+        const errorDiv = $(`
+            <div style="position: fixed; top: 100px; right: 20px; background: var(--accent-red); 
+                        color: white; padding: 1rem 1.5rem; border-radius: var(--radius-lg); 
+                        box-shadow: var(--shadow-xl); z-index: 9999; animation: slideInRight 0.3s ease;">
+                <i class="fas fa-exclamation-circle"></i> ${message}
+            </div>
+        `);
         
-        STATE.isThinking = false;
-        STATE.lastEvaluation = 0;
+        $('body').append(errorDiv);
         
-        this.updateStatus();
-        this.updateMoveHistory();
-        
-        $('#evaluation').text('0.00');
-        $('#thinkingOverlay').removeClass('active');
-        
-        // If player is black, AI makes first move
-        if (STATE.playerColor === 'black') {
-            setTimeout(() => this.makeAIMove(), 500);
-        }
+        setTimeout(() => {
+            errorDiv.fadeOut(300, function() { $(this).remove(); });
+        }, 4000);
     }
 };
