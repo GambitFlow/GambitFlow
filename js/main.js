@@ -1,12 +1,14 @@
 // Main Application Entry Point
 $(document).ready(function() {
-    // Initialize AOS (Animate On Scroll)
+    // Initialize AOS (Animate On Scroll) - but don't hide elements
     if (typeof AOS !== 'undefined') {
         AOS.init({
             duration: 800,
             easing: 'ease-in-out',
             once: true,
-            offset: 100
+            offset: 100,
+            disable: false, // Always enable
+            startEvent: 'DOMContentLoaded'
         });
     }
     
@@ -168,22 +170,31 @@ $(document).ready(function() {
         });
     }
     
-    // Add animation classes on scroll
-    const animateOnScroll = () => {
-        $('.feature-card, .model-card, .status-card').each(function() {
-            const elementTop = $(this).offset().top;
-            const elementBottom = elementTop + $(this).outerHeight();
-            const viewportTop = $(window).scrollTop();
-            const viewportBottom = viewportTop + $(window).height();
-            
-            if (elementBottom > viewportTop && elementTop < viewportBottom) {
-                $(this).addClass('visible');
-            }
+    // Make sure cards are visible - Override any animation issues
+    const makeCardsVisible = () => {
+        $('.feature-card, .model-card, .status-card, .card').each(function() {
+            $(this).css({
+                'opacity': '1',
+                'visibility': 'visible'
+            });
         });
     };
     
-    $(window).on('scroll', animateOnScroll);
-    animateOnScroll(); // Initial check
+    // Call immediately
+    makeCardsVisible();
+    
+    // Call on scroll
+    $(window).on('scroll', makeCardsVisible);
+    
+    // Call on AOS refresh
+    if (typeof AOS !== 'undefined') {
+        $(window).on('load', function() {
+            setTimeout(() => {
+                AOS.refresh();
+                makeCardsVisible();
+            }, 100);
+        });
+    }
     
     // Console welcome message
     console.log('%cGambitFlow Chess AI', 'font-size: 24px; font-weight: bold; color: #3b82f6;');
