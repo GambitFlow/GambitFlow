@@ -65,22 +65,6 @@
     .models-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
-    /* Arena Page Tablet */
-    .arena-page > .container > div:nth-child(2) {
-        grid-template-columns: 1fr !important;
-        gap: 2rem !important;
-    }
-    
-    .arena-controls > div {
-        flex-direction: column !important;
-        align-items: stretch !important;
-    }
-    
-    .arena-controls > div > div {
-        width: 100% !important;
-        min-width: 100% !important;
-    }
 }
 
 /* Tablet Portrait */
@@ -191,64 +175,6 @@
         right: 1rem;
         left: 1rem;
         padding: 1rem;
-    }
-    
-    /* Arena Page Mobile */
-    .arena-page {
-        padding: 3rem 0;
-    }
-    
-    .arena-header {
-        margin-bottom: 2rem !important;
-    }
-    
-    .arena-header h1 {
-        font-size: 2rem !important;
-    }
-    
-    .arena-header p {
-        font-size: 1rem !important;
-    }
-    
-    .arena-controls {
-        padding: 1.5rem !important;
-    }
-    
-    .arena-controls > div {
-        gap: 1rem !important;
-    }
-    
-    .arena-controls button {
-        width: 100%;
-    }
-    
-    .arena-page > .container > div:nth-child(2) {
-        grid-template-columns: 1fr !important;
-    }
-    
-    .arena-page .card {
-        padding: 1.5rem !important;
-    }
-    
-    #arenaBoard {
-        max-width: 100% !important;
-    }
-    
-    #benchmarkStats > div {
-        margin-bottom: 1rem !important;
-    }
-    
-    #benchmarkStats > div > div:nth-child(2) {
-        padding: 0.75rem !important;
-    }
-    
-    #benchmarkStats > div > div:nth-child(2) > div {
-        grid-template-columns: 1fr !important;
-        gap: 0.5rem !important;
-    }
-    
-    #arenaMoveLog {
-        max-height: 300px !important;
     }
 }
 
@@ -392,94 +318,6 @@
         padding: 0.625rem;
         font-size: 0.8125rem;
     }
-    
-    /* Arena Page Small Mobile */
-    .arena-header h1 {
-        font-size: 1.75rem !important;
-    }
-    
-    .arena-header p {
-        font-size: 0.9375rem !important;
-    }
-    
-    .arena-controls {
-        padding: 1rem !important;
-    }
-    
-    .arena-controls label {
-        font-size: 0.875rem !important;
-    }
-    
-    .arena-controls select {
-        font-size: 0.9375rem !important;
-        padding: 0.625rem !important;
-    }
-    
-    .arena-controls button {
-        padding: 0.875rem 1.25rem !important;
-        font-size: 0.9375rem !important;
-    }
-    
-    .arena-page .card {
-        padding: 1rem !important;
-    }
-    
-    .arena-page h3 {
-        font-size: 1.25rem !important;
-    }
-    
-    .arena-page h4 {
-        font-size: 1.125rem !important;
-        margin-bottom: 0.75rem !important;
-    }
-    
-    .arena-page .badge {
-        padding: 0.375rem 0.75rem !important;
-        font-size: 0.75rem !important;
-    }
-    
-    #benchmarkStats {
-        font-size: 0.8125rem !important;
-    }
-    
-    #benchmarkStats strong {
-        font-size: 0.875rem !important;
-    }
-    
-    #benchmarkStats span {
-        font-size: 0.75rem !important;
-    }
-    
-    #benchmarkStats > div > div:nth-child(2) {
-        padding: 0.625rem !important;
-    }
-    
-    #arenaMoveLog {
-        max-height: 250px !important;
-        font-size: 0.8125rem !important;
-    }
-    
-    #arenaMoveLog > div {
-        padding: 0.375rem !important;
-    }
-    
-    #arenaMoveLog span {
-        font-size: 0.8125rem !important;
-    }
-    
-    #arenaMoveLog span:last-child {
-        font-size: 0.6875rem !important;
-    }
-    
-    #arenaStatus {
-        font-size: 0.9375rem !important;
-    }
-    
-    .arena-page .spinner-sm {
-        width: 20px !important;
-        height: 20px !important;
-        border-width: 2px !important;
-    }
 }
 
 /* Very Small Mobile */
@@ -499,25 +337,5 @@
     .logo {
         width: 40px;
         height: 40px;
-    }
-    
-    .arena-header h1 {
-        font-size: 1.5rem !important;
-    }
-    
-    .arena-controls {
-        padding: 0.75rem !important;
-    }
-    
-    .arena-controls select {
-        font-size: 0.875rem !important;
-    }
-    
-    .arena-page h3 {
-        font-size: 1.125rem !important;
-    }
-    
-    .arena-page h4 {
-        font-size: 1rem !important;
     }
 }
