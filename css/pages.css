@@ -154,7 +154,7 @@
     margin-bottom: 5rem;
     font-weight: 800;
     letter-spacing: -0.03em;
-    color: var(--text-primary);
+    color: #ffffff;
 }
 
 .features-grid {
@@ -180,11 +180,11 @@
     font-size: 1.625rem;
     margin-bottom: 1rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: #ffffff;
 }
 
 .feature-card p {
-    color: var(--text-secondary);
+    color: #e2e8f0;
     line-height: 1.7;
     font-size: 1.0625rem;
 }
@@ -448,10 +448,17 @@
 
 .model-card {
     padding: 2.75rem;
-    background: var(--bg-card);
-    border: 2px solid var(--border-light);
+    background: linear-gradient(135deg, #2a3555 0%, #1f2847 100%);
+    border: 2px solid #4a5578;
     border-radius: var(--radius-2xl);
     position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.model-card:hover {
+    border-color: var(--accent-blue);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(79, 158, 255, 0.3);
 }
 
 .model-badge {
@@ -486,11 +493,11 @@
 .model-card h2 {
     font-size: 2rem;
     margin-bottom: 1rem;
-    color: var(--text-primary);
+    color: #ffffff;
 }
 
 .model-card > p {
-    color: var(--text-secondary);
+    color: #e2e8f0;
     margin-bottom: 2rem;
     font-size: 1.0625rem;
 }
@@ -498,16 +505,16 @@
 .model-specs {
     margin: 2rem 0;
     padding-left: 0;
-    color: var(--text-secondary);
+    color: #e2e8f0;
 }
 
 .model-specs li {
     padding: 0.875rem 1rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid #475080;
     display: flex;
     justify-content: space-between;
     font-size: 0.9375rem;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(0, 0, 0, 0.2);
     margin-bottom: 0.5rem;
     border-radius: var(--radius-sm);
 }
@@ -517,7 +524,7 @@
 }
 
 .model-specs strong {
-    color: var(--text-primary);
+    color: #ffffff;
     font-weight: 600;
 }
 
@@ -533,25 +540,26 @@
     margin: 0 auto;
     padding: 3rem;
     line-height: 1.8;
-    background: var(--bg-card);
-    border: 2px solid var(--border-light);
+    background: linear-gradient(135deg, #2a3555 0%, #1f2847 100%);
+    border: 2px solid #4a5578;
     border-radius: var(--radius-2xl);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .docs-content h1 {
     font-size: 3rem;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 3px solid var(--border-light);
-    color: var(--text-primary);
+    border-bottom: 3px solid #4a5578;
+    color: #ffffff;
 }
 
 .docs-content h2 {
     margin-top: 3rem;
     margin-bottom: 1.5rem;
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--border);
-    color: var(--text-primary);
+    border-bottom: 2px solid #475080;
+    color: #ffffff;
 }
 
 .docs-content h3 {
@@ -562,27 +570,27 @@
 
 .docs-content p {
     margin-bottom: 1.5rem;
-    color: var(--text-secondary);
+    color: #e2e8f0;
     font-size: 1.0625rem;
 }
 
 .docs-content pre {
-    background: var(--bg-tertiary);
+    background: rgba(0, 0, 0, 0.4);
     padding: 1.5rem;
     border-radius: var(--radius-lg);
     overflow-x: auto;
     margin: 1.5rem 0;
-    border: 2px solid var(--border);
+    border: 2px solid #475080;
     box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .docs-content code {
-    background: var(--bg-tertiary);
+    background: rgba(0, 0, 0, 0.3);
     padding: 0.3rem 0.6rem;
     border-radius: var(--radius-sm);
     font-size: 0.9em;
     color: var(--accent-cyan);
-    border: 1px solid var(--border);
+    border: 1px solid #475080;
     font-weight: 500;
 }
 
@@ -590,13 +598,13 @@
     background: none;
     padding: 0;
     border: none;
-    color: var(--text-primary);
+    color: #e2e8f0;
 }
 
 .docs-content ol,
 .docs-content ul {
     padding-left: 2rem;
-    color: var(--text-secondary);
+    color: #e2e8f0;
     margin: 1.5rem 0;
 }
 
@@ -621,9 +629,9 @@
     border-left: 4px solid var(--accent-blue);
     padding-left: 1.5rem;
     margin: 1.5rem 0;
-    color: var(--text-secondary);
+    color: #e2e8f0;
     font-style: italic;
-    background: rgba(79, 158, 255, 0.05);
+    background: rgba(79, 158, 255, 0.08);
     padding: 1rem 1.5rem;
     border-radius: var(--radius-md);
 }
@@ -633,30 +641,30 @@
     border-collapse: separate;
     border-spacing: 0;
     margin: 2rem 0;
-    border: 2px solid var(--border-light);
+    border: 2px solid #4a5578;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    background: var(--bg-tertiary);
+    background: rgba(0, 0, 0, 0.25);
 }
 
 .docs-content th,
 .docs-content td {
     padding: 1rem;
     text-align: left;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid #475080;
 }
 
 .docs-content th {
-    background: var(--bg-secondary);
+    background: rgba(0, 0, 0, 0.4);
     font-weight: 600;
-    color: var(--text-primary);
+    color: #ffffff;
     text-transform: uppercase;
     font-size: 0.875rem;
     letter-spacing: 0.05em;
 }
 
 .docs-content td {
-    color: var(--text-secondary);
+    color: #e2e8f0;
 }
 
 .docs-content tr:last-child td {
@@ -664,7 +672,7 @@
 }
 
 .docs-content tr:hover {
-    background: rgba(79, 158, 255, 0.08);
+    background: rgba(79, 158, 255, 0.1);
 }
 
 /* Status Page */
@@ -680,17 +688,17 @@
 
 .status-card {
     padding: 2rem;
-    background: var(--bg-card);
-    border: 2px solid var(--border-light);
+    background: linear-gradient(135deg, #2a3555 0%, #1f2847 100%);
+    border: 2px solid #4a5578;
     border-radius: var(--radius-xl);
     margin-bottom: 1.5rem;
     transition: var(--transition);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .status-card:hover {
     border-color: var(--accent-blue);
-    box-shadow: 0 8px 32px rgba(79, 158, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(79, 158, 255, 0.3);
     transform: translateY(-2px);
 }
 
@@ -703,7 +711,7 @@
 
 .status-header h3 {
     font-size: 1.5rem;
-    color: var(--text-primary);
+    color: #ffffff;
 }
 
 .status-info {
@@ -711,24 +719,24 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     padding-top: 1rem;
-    border-top: 2px solid var(--border);
+    border-top: 2px solid #475080;
 }
 
 .status-info > div {
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(0, 0, 0, 0.25);
     padding: 1rem;
     border-radius: var(--radius-md);
-    border: 1px solid var(--border);
+    border: 1px solid #475080;
 }
 
 .status-info p {
-    color: var(--text-secondary);
+    color: #e2e8f0;
     font-size: 0.9375rem;
     margin: 0;
 }
 
 .status-info strong {
-    color: var(--text-primary);
+    color: #ffffff;
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
