@@ -288,6 +288,7 @@
     margin: 0 auto;
 }
 
+/* Thinking Indicator - Only show when active */
 .thinking-indicator {
     position: fixed;
     bottom: 2rem;
@@ -304,10 +305,14 @@
     transition: transform 0.3s ease;
     z-index: 999;
     color: #ffffff;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .thinking-indicator.active {
     transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
 }
 
 .thinking-indicator .spinner-sm {
@@ -480,8 +485,8 @@
 
 .model-card:hover {
     border-color: var(--accent-blue);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(79, 158, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(79, 158, 255, 0.3);
 }
 
 .model-badge {
@@ -781,12 +786,53 @@
     padding: 5rem 0;
 }
 
+
+
+/* Arena Page - Player Names Positioning */
+.arena-page #whitePlayerName {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.arena-page #blackPlayerName {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+
+/* Arena Page - Text Colors */
+.arena-page h3,
+.arena-page h4 {
+    color: #ffffff !important;
+}
+
+.arena-page .card h4 {
+    color: #ffffff !important;
+}
+
+.arena-page .section-title {
+    color: #ffffff !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .arena-header {
     margin-bottom: 4rem;
 }
 
 .arena-header p {
-    color: #e2e8f0;
+    color: #e2e8f0 !important;
 }
 
 .arena-controls {
@@ -795,7 +841,7 @@
 }
 
 .arena-controls label {
-    color: #e2e8f0;
+    color: #ffffff !important;
 }
 
 .arena-controls select {
@@ -812,13 +858,21 @@
 }
 
 #arenaStatus {
-    color: #e2e8f0;
+    color: #e2e8f0 !important;
 }
 
 #arenaMoveLog {
-    color: #e2e8f0;
+    color: #e2e8f0 !important;
 }
 
 #benchmarkStats {
-    color: #e2e8f0;
+    color: #e2e8f0 !important;
+}
+
+#benchmarkStats strong {
+    color: #ffffff !important;
+}
+
+#benchmarkStats span {
+    color: #e2e8f0 !important;
 }
