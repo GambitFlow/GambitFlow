@@ -186,12 +186,12 @@ const PAGES = {
         </div>
     `,
 
-    arena: `
+  arena: `
         <div class="arena-page fade-in">
             <div class="container">
                 <div class="arena-header text-center" style="margin-bottom: 4rem;">
                     <h1 class="section-title gradient-text"><i class="fas fa-trophy"></i> Engine Arena</h1>
-                    <p style="color: var(--text-secondary); font-size: 1.125rem; max-width: 700px; margin: 0 auto;">
+                    <p style="color: #e2e8f0; font-size: 1.125rem; max-width: 700px; margin: 0 auto;">
                         Watch our AI engines compete against each other with detailed benchmarks and statistics
                     </p>
                 </div>
@@ -199,8 +199,8 @@ const PAGES = {
                 <div class="arena-controls card" style="padding: 2rem; margin-bottom: 2rem;">
                     <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: space-between;">
                         <div style="flex: 1; min-width: 200px;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">White Engine</label>
-                            <select id="whiteEngine" class="form-select" style="background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border); padding: 0.75rem; border-radius: var(--radius-md);">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #ffffff;">White Engine</label>
+                            <select id="whiteEngine" class="form-select" style="background: var(--bg-tertiary); color: #ffffff; border: 1px solid var(--border); padding: 0.75rem; border-radius: var(--radius-md);">
                                 <option value="nano">Nexus-Nano</option>
                                 <option value="core" selected>Nexus-Core</option>
                                 <option value="base">Synapse-Base</option>
@@ -210,8 +210,8 @@ const PAGES = {
                             <i class="fas fa-exchange-alt fa-2x" style="color: var(--accent-blue);"></i>
                         </div>
                         <div style="flex: 1; min-width: 200px;">
-                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Black Engine</label>
-                            <select id="blackEngine" class="form-select" style="background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border); padding: 0.75rem; border-radius: var(--radius-md);">
+                            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: #ffffff;">Black Engine</label>
+                            <select id="blackEngine" class="form-select" style="background: var(--bg-tertiary); color: #ffffff; border: 1px solid var(--border); padding: 0.75rem; border-radius: var(--radius-md);">
                                 <option value="nano">Nexus-Nano</option>
                                 <option value="core">Nexus-Core</option>
                                 <option value="base" selected>Synapse-Base</option>
@@ -227,19 +227,19 @@ const PAGES = {
                     <div>
                         <div class="card" style="padding: 2rem; margin-bottom: 1.5rem;">
                             <div style="text-align: center; margin-bottom: 1.5rem;">
-                                <h3 id="whitePlayerName" style="color: var(--text-primary);">Nexus-Core</h3>
+                                <h3 id="whitePlayerName" style="color: #ffffff; font-weight: 700;">Nexus-Core</h3>
                                 <span class="badge badge-info">White</span>
                             </div>
                             <div id="arenaBoard"></div>
                             <div style="text-align: center; margin-top: 1.5rem;">
-                                <h3 id="blackPlayerName" style="color: var(--text-primary);">Synapse-Base</h3>
                                 <span class="badge badge-info">Black</span>
+                                <h3 id="blackPlayerName" style="color: #ffffff; font-weight: 700; margin-top: 0.5rem;">Synapse-Base</h3>
                             </div>
                         </div>
 
                         <div class="card" style="padding: 1.5rem;">
-                            <h4 style="margin-bottom: 1rem;"><i class="fas fa-info-circle"></i> Match Status</h4>
-                            <div id="arenaStatus" style="color: var(--text-secondary);">
+                            <h4 style="margin-bottom: 1rem; color: #ffffff;"><i class="fas fa-info-circle"></i> Match Status</h4>
+                            <div id="arenaStatus" style="color: #e2e8f0;">
                                 Select engines and start the match
                             </div>
                         </div>
@@ -247,20 +247,20 @@ const PAGES = {
 
                     <div>
                         <div class="card" style="padding: 1.5rem; margin-bottom: 1.5rem;">
-                            <h4 style="margin-bottom: 1.5rem;"><i class="fas fa-chart-bar"></i> Live Benchmarks</h4>
-                            <div id="benchmarkStats"></div>
+                            <h4 style="margin-bottom: 1.5rem; color: #ffffff;"><i class="fas fa-chart-bar"></i> Live Benchmarks</h4>
+                            <div id="benchmarkStats" style="color: #e2e8f0;"></div>
                         </div>
 
                         <div class="card" style="padding: 1.5rem;">
-                            <h4 style="margin-bottom: 1rem;"><i class="fas fa-list"></i> Move Log</h4>
-                            <div id="arenaMoveLog" style="max-height: 400px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.875rem;"></div>
+                            <h4 style="margin-bottom: 1rem; color: #ffffff;"><i class="fas fa-list"></i> Move Log</h4>
+                            <div id="arenaMoveLog" style="max-height: 400px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 0.875rem; color: #e2e8f0;"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     `,
-
+    
     models: `
         <div class="models-page fade-in">
             <div class="container">

@@ -41,7 +41,7 @@
 }
 
 .nav-link {
-    color: var(--text-secondary);
+    color: #e2e8f0;
     font-weight: 500;
     font-size: 0.95rem;
     transition: var(--transition);
@@ -80,7 +80,7 @@
 .mobile-menu-btn span {
     width: 24px;
     height: 2px;
-    background: var(--text-primary);
+    background: #ffffff;
     transition: var(--transition);
     border-radius: 2px;
 }
@@ -101,6 +101,7 @@
     white-space: nowrap;
     position: relative;
     overflow: hidden;
+    color: #ffffff;
 }
 
 .btn::before {
@@ -129,7 +130,7 @@
 
 .btn-secondary {
     background: var(--bg-tertiary);
-    color: var(--text-primary);
+    color: #ffffff;
     border: 1px solid var(--border);
 }
 
@@ -174,6 +175,10 @@
     cursor: not-allowed;
 }
 
+.w-100 {
+    width: 100%;
+}
+
 /* Cards */
 .card {
     background: linear-gradient(135deg, #2a3555 0%, #1f2847 100%);
@@ -184,6 +189,8 @@
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .card::before {
@@ -329,11 +336,11 @@
 .footer-section h4 {
     font-size: 1.125rem;
     margin-bottom: 1.25rem;
-    color: var(--text-primary);
+    color: #ffffff;
 }
 
 .footer-section p {
-    color: var(--text-secondary);
+    color: #e2e8f0;
     margin-bottom: 1.5rem;
     line-height: 1.7;
 }
@@ -343,7 +350,7 @@
 }
 
 .footer-section a {
-    color: var(--text-secondary);
+    color: #e2e8f0;
     display: inline-block;
     transition: var(--transition);
 }
@@ -368,6 +375,7 @@
     align-items: center;
     justify-content: center;
     transition: var(--transition);
+    color: #ffffff;
 }
 
 .social-links a:hover {
@@ -380,5 +388,33 @@
     padding-top: 2rem;
     border-top: 1px solid var(--border);
     text-align: center;
-    color: var(--text-tertiary);
+    color: #cbd5e1;
+}
+
+/* Form Elements */
+.form-select {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--bg-tertiary);
+    color: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.form-select:hover {
+    border-color: var(--accent-blue);
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-select option {
+    background: var(--bg-tertiary);
+    color: #ffffff;
 }

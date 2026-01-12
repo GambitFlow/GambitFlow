@@ -25,7 +25,8 @@
 }
 
 .fade-in {
-    animation: fadeIn 0.6s ease-out;
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 1;
 }
 
 /* Slide In From Left */
@@ -41,7 +42,8 @@
 }
 
 .slide-in-left {
-    animation: slideInLeft 0.8s ease-out;
+    animation: slideInLeft 0.8s ease-out forwards;
+    opacity: 1;
 }
 
 /* Slide In From Right */
@@ -57,7 +59,8 @@
 }
 
 .slide-in-right {
-    animation: slideInRight 0.8s ease-out;
+    animation: slideInRight 0.8s ease-out forwards;
+    opacity: 1;
 }
 
 /* Scale In */
@@ -73,7 +76,8 @@
 }
 
 .scale-in {
-    animation: scaleIn 0.5s ease-out;
+    animation: scaleIn 0.5s ease-out forwards;
+    opacity: 1;
 }
 
 /* Pulse */
@@ -207,7 +211,8 @@
 
 /* Page Transitions */
 .page-enter {
-    animation: fadeIn 0.5s ease-out;
+    animation: fadeIn 0.5s ease-out forwards;
+    opacity: 1;
 }
 
 .page-exit {
@@ -233,6 +238,8 @@
 /* Card Hover Effect */
 .card {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    visibility: visible;
 }
 
 .card:hover {
@@ -276,7 +283,8 @@
 }
 
 .fade-in-up {
-    animation: fadeInUp 0.8s ease-out;
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 1;
 }
 
 /* Zoom In */
@@ -292,7 +300,8 @@
 }
 
 .zoom-in {
-    animation: zoomIn 0.6s ease-out;
+    animation: zoomIn 0.6s ease-out forwards;
+    opacity: 1;
 }
 
 /* Slide Down */
@@ -308,7 +317,8 @@
 }
 
 .slide-down {
-    animation: slideDown 0.5s ease-out;
+    animation: slideDown 0.5s ease-out forwards;
+    opacity: 1;
 }
 
 /* Background Gradient Animation */
@@ -399,4 +409,22 @@
 
 .attention {
     animation: attention 2s ease-in-out;
+}
+
+/* Ensure all cards are visible by default */
+.feature-card,
+.model-card,
+.status-card {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* AOS Animation Override - Make sure cards are visible */
+[data-aos] {
+    opacity: 1;
+    visibility: visible;
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
 }

@@ -41,11 +41,12 @@
     margin-bottom: 1.75rem;
     font-weight: 900;
     letter-spacing: -0.04em;
+    color: #ffffff;
 }
 
 .hero-description {
     font-size: 1.375rem;
-    color: var(--text-secondary);
+    color: #e2e8f0;
     margin-bottom: 2.5rem;
     line-height: 1.65;
 }
@@ -73,7 +74,7 @@
 
 .stat-label {
     font-size: 0.875rem;
-    color: var(--text-tertiary);
+    color: #cbd5e1;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-weight: 600;
@@ -176,6 +177,11 @@
     box-shadow: 0 8px 24px rgba(79, 158, 255, 0.4);
 }
 
+.feature-card {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
 .feature-card h3 {
     font-size: 1.625rem;
     margin-bottom: 1rem;
@@ -210,10 +216,11 @@
 .play-header h1 {
     font-size: 2.25rem;
     margin-bottom: 0.5rem;
+    color: #ffffff;
 }
 
 .play-header p {
-    color: var(--text-secondary);
+    color: #e2e8f0;
     font-size: 1.0625rem;
 }
 
@@ -236,6 +243,7 @@
 .sidebar-card .card-header {
     background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.05));
     border-bottom: 1px solid var(--border-light);
+    color: #ffffff;
 }
 
 .model-option {
@@ -249,6 +257,7 @@
     border-radius: var(--radius-lg);
     cursor: pointer;
     transition: var(--transition);
+    color: #ffffff;
 }
 
 .model-option:hover {
@@ -279,6 +288,7 @@
     margin: 0 auto;
 }
 
+/* Thinking Indicator - Only show when active */
 .thinking-indicator {
     position: fixed;
     bottom: 2rem;
@@ -294,10 +304,15 @@
     transform: translateY(150%);
     transition: transform 0.3s ease;
     z-index: 999;
+    color: #ffffff;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .thinking-indicator.active {
     transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
 }
 
 .thinking-indicator .spinner-sm {
@@ -331,7 +346,7 @@
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--text-secondary);
+    color: #e2e8f0;
     border-bottom: 2px solid var(--border);
 }
 
@@ -340,6 +355,7 @@
     border-bottom: 1px solid var(--border);
     font-family: 'Courier New', monospace;
     font-size: 0.9375rem;
+    color: #e2e8f0;
 }
 
 .pgn-table tr:hover td {
@@ -347,13 +363,13 @@
 }
 
 .pgn-table .move-num {
-    color: var(--text-tertiary);
+    color: #cbd5e1;
     font-weight: 600;
 }
 
 .pgn-table .move-white,
 .pgn-table .move-black {
-    color: var(--text-primary);
+    color: #ffffff;
     cursor: pointer;
     transition: var(--transition-fast);
 }
@@ -396,10 +412,11 @@
 .color-modal-content h2 {
     margin-bottom: 1rem;
     font-size: 2rem;
+    color: #ffffff;
 }
 
 .color-modal-content p {
-    color: var(--text-secondary);
+    color: #e2e8f0;
     margin-bottom: 2.5rem;
     font-size: 1.0625rem;
 }
@@ -418,6 +435,7 @@
     border-radius: var(--radius-xl);
     cursor: pointer;
     transition: var(--transition);
+    color: #ffffff;
 }
 
 .color-option:hover {
@@ -432,6 +450,14 @@
 
 .color-option.white i { color: #ffffff; }
 .color-option.black i { color: #000000; }
+
+.color-option h3 {
+    color: #ffffff;
+}
+
+.color-option p {
+    color: #e2e8f0;
+}
 
 /* Models Page */
 .models-page {
@@ -453,12 +479,14 @@
     border-radius: var(--radius-2xl);
     position: relative;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .model-card:hover {
     border-color: var(--accent-blue);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(79, 158, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(79, 158, 255, 0.3);
 }
 
 .model-badge {
@@ -517,6 +545,7 @@
     background: rgba(0, 0, 0, 0.2);
     margin-bottom: 0.5rem;
     border-radius: var(--radius-sm);
+    color: #e2e8f0;
 }
 
 .model-specs li:last-child {
@@ -565,7 +594,11 @@
 .docs-content h3 {
     margin-top: 2rem;
     margin-bottom: 1rem;
-    color: var(--accent-blue);
+    color: #4f9eff;
+}
+
+.docs-content h4 {
+    color: #e2e8f0;
 }
 
 .docs-content p {
@@ -589,7 +622,7 @@
     padding: 0.3rem 0.6rem;
     border-radius: var(--radius-sm);
     font-size: 0.9em;
-    color: var(--accent-cyan);
+    color: #22d3ee;
     border: 1px solid #475080;
     font-weight: 500;
 }
@@ -611,6 +644,7 @@
 .docs-content li {
     margin-bottom: 0.875rem;
     line-height: 1.7;
+    color: #e2e8f0;
 }
 
 .docs-content a {
@@ -694,6 +728,8 @@
     margin-bottom: 1.5rem;
     transition: var(--transition);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .status-card:hover {
@@ -750,13 +786,66 @@
     padding: 5rem 0;
 }
 
+
+
+/* Arena Page - Player Names Positioning */
+.arena-page #whitePlayerName {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.arena-page #blackPlayerName {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+
+/* Arena Page - Text Colors */
+.arena-page h3,
+.arena-page h4 {
+    color: #ffffff !important;
+}
+
+.arena-page .card h4 {
+    color: #ffffff !important;
+}
+
+.arena-page .section-title {
+    color: #ffffff !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .arena-header {
     margin-bottom: 4rem;
+}
+
+.arena-header p {
+    color: #e2e8f0 !important;
 }
 
 .arena-controls {
     padding: 2rem;
     margin-bottom: 2rem;
+}
+
+.arena-controls label {
+    color: #ffffff !important;
+}
+
+.arena-controls select {
+    color: #ffffff;
 }
 
 #arenaBoard {
@@ -766,4 +855,24 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     border-radius: var(--radius-xl);
     overflow: hidden;
+}
+
+#arenaStatus {
+    color: #e2e8f0 !important;
+}
+
+#arenaMoveLog {
+    color: #e2e8f0 !important;
+}
+
+#benchmarkStats {
+    color: #e2e8f0 !important;
+}
+
+#benchmarkStats strong {
+    color: #ffffff !important;
+}
+
+#benchmarkStats span {
+    color: #e2e8f0 !important;
 }

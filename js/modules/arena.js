@@ -73,7 +73,7 @@ const Arena = {
         $('#arenaStatus').html(`
             <div style="display: flex; align-items: center; gap: 0.75rem;">
                 <div class="spinner spinner-sm"></div>
-                <span>Match in progress...</span>
+                <span style="color: #e2e8f0;">Match in progress...</span>
             </div>
         `);
         
@@ -140,13 +140,13 @@ const Arena = {
                 <h3 style="color: var(--accent-green); margin-bottom: 0.5rem;">
                     ${CONFIG.MODELS[winnerEngine].name} wins!
                 </h3>
-                <p style="color: var(--text-secondary);">by checkmate</p>
+                <p style="color: #e2e8f0;">by checkmate</p>
             `;
         } else if (this.game.in_draw()) {
             resultHTML += `
                 <i class="fas fa-handshake fa-3x" style="color: var(--accent-orange); margin-bottom: 1rem;"></i>
                 <h3 style="color: var(--accent-orange); margin-bottom: 0.5rem;">Draw!</h3>
-                <p style="color: var(--text-secondary);">${result}</p>
+                <p style="color: #e2e8f0;">${result}</p>
             `;
         } else {
             resultHTML += `
@@ -173,11 +173,10 @@ const Arena = {
     },
     
     updateStatus(message, player) {
-        const playerColor = player === 'white' ? 'var(--text-primary)' : 'var(--text-primary)';
         $('#arenaStatus').html(`
             <div style="display: flex; align-items: center; gap: 0.75rem;">
                 <div class="spinner spinner-sm"></div>
-                <span style="color: ${playerColor};">${message}</span>
+                <span style="color: #e2e8f0;">${message}</span>
             </div>
         `);
     },
@@ -193,8 +192,8 @@ const Arena = {
             
             html += `
                 <div style="padding: 0.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
-                    <span>${icon} ${moveDisplay}</span>
-                    <span style="color: var(--text-tertiary); font-size: 0.75rem;">${log.time}ms</span>
+                    <span style="color: #e2e8f0;">${icon} ${moveDisplay}</span>
+                    <span style="color: #cbd5e1; font-size: 0.75rem;">${log.time}ms</span>
                 </div>
             `;
         }
@@ -210,58 +209,58 @@ const Arena = {
         const html = `
             <div style="margin-bottom: 1.5rem;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <strong style="color: var(--text-secondary);">
+                    <strong style="color: #ffffff;">
                         <i class="fas fa-chess-king" style="color: white;"></i> ${CONFIG.MODELS[this.whiteEngine].name}
                     </strong>
                 </div>
                 <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 0.5rem;">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.875rem;">
                         <div>
-                            <span style="color: var(--text-tertiary);">Moves:</span>
+                            <span style="color: #cbd5e1;">Moves:</span>
                             <strong style="color: var(--accent-blue); margin-left: 0.5rem;">${whiteStats.moves}</strong>
                         </div>
                         <div>
-                            <span style="color: var(--text-tertiary);">Total Time:</span>
+                            <span style="color: #cbd5e1;">Total Time:</span>
                             <strong style="color: var(--accent-cyan); margin-left: 0.5rem;">${(whiteStats.totalTime / 1000).toFixed(2)}s</strong>
                         </div>
                         <div>
-                            <span style="color: var(--text-tertiary);">Avg Time:</span>
+                            <span style="color: #cbd5e1;">Avg Time:</span>
                             <strong style="color: var(--accent-green); margin-left: 0.5rem;">${whiteStats.avgTime.toFixed(0)}ms</strong>
                         </div>
                         <div>
-                            <span style="color: var(--text-tertiary);">ELO:</span>
+                            <span style="color: #cbd5e1;">ELO:</span>
                             <strong style="color: var(--accent-orange); margin-left: 0.5rem;">${CONFIG.MODELS[this.whiteEngine].elo}</strong>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div style="text-align: center; margin: 1.5rem 0; color: var(--text-tertiary);">
+            <div style="text-align: center; margin: 1.5rem 0; color: #cbd5e1;">
                 <i class="fas fa-exchange-alt"></i>
             </div>
             
             <div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <strong style="color: var(--text-secondary);">
+                    <strong style="color: #ffffff;">
                         <i class="fas fa-chess-king" style="color: black; background: white; border-radius: 50%; padding: 2px;"></i> ${CONFIG.MODELS[this.blackEngine].name}
                     </strong>
                 </div>
                 <div style="background: var(--bg-tertiary); padding: 1rem; border-radius: var(--radius-md);">
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.875rem;">
                         <div>
-                            <span style="color: var(--text-tertiary);">Moves:</span>
+                            <span style="color: #cbd5e1;">Moves:</span>
                             <strong style="color: var(--accent-blue); margin-left: 0.5rem;">${blackStats.moves}</strong>
                         </div>
                         <div>
-                            <span style="color: var(--text-tertiary);">Total Time:</span>
+                            <span style="color: #cbd5e1;">Total Time:</span>
                             <strong style="color: var(--accent-cyan); margin-left: 0.5rem;">${(blackStats.totalTime / 1000).toFixed(2)}s</strong>
                         </div>
                         <div>
-                            <span style="color: var(--text-tertiary);">Avg Time:</span>
+                            <span style="color: #cbd5e1;">Avg Time:</span>
                             <strong style="color: var(--accent-green); margin-left: 0.5rem;">${blackStats.avgTime.toFixed(0)}ms</strong>
                         </div>
                         <div>
-                            <span style="color: var(--text-tertiary);">ELO:</span>
+                            <span style="color: #cbd5e1;">ELO:</span>
                             <strong style="color: var(--accent-orange); margin-left: 0.5rem;">${CONFIG.MODELS[this.blackEngine].elo}</strong>
                         </div>
                     </div>
