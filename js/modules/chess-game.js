@@ -22,7 +22,6 @@ const ChessGame = {
             onDragStart: this.onDragStart.bind(this),
             onDrop: this.onDrop.bind(this),
             onSnapEnd: this.onSnapEnd.bind(this),
-            onDragMove: this.onDragMove.bind(this),
             orientation: color,
             pieceTheme: function(piece) {
                 return 'assets/pieces/' + piece + '.svg';
@@ -56,24 +55,10 @@ const ChessGame = {
             (STATE.game.turn() === 'b' && piece.search(/^w/) !== -1)) {
             return false;
         }
-        
-        // Prevent body scroll on mobile
-        $('body').addClass('dragging');
-    },
-
-    // Handle drag move
-    onDragMove() {
-        // Keep body scroll disabled while dragging
-        if (!$('body').hasClass('dragging')) {
-            $('body').addClass('dragging');
-        }
     },
 
     // Handle piece drop
     onDrop(source, target) {
-        // Re-enable body scroll
-        $('body').removeClass('dragging');
-        
         const move = STATE.game.move({
             from: source,
             to: target,
@@ -93,8 +78,6 @@ const ChessGame = {
     // Update board position
     onSnapEnd() {
         STATE.board.position(STATE.game.fen());
-        // Ensure body scroll is re-enabled
-        $('body').removeClass('dragging');
     },
 
     // Make AI move
@@ -211,7 +194,6 @@ const ChessGame = {
             
             $('#evaluation').text('0.00');
             $('#thinkingIndicator').removeClass('active');
-            $('body').removeClass('dragging');
             
             if (STATE.playerColor === 'black') {
                 setTimeout(() => this.makeAIMove(), 800);
