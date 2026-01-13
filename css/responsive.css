@@ -1,15 +1,5 @@
 /* Responsive Design */
 
-/* Prevent scroll when dragging chess pieces */
-body.dragging {
-    overflow: hidden;
-    touch-action: none;
-}
-
-.chessboard-container {
-    touch-action: none;
-}
-
 /* Large Desktop */
 @media (max-width: 1400px) {
     .container {
@@ -74,22 +64,6 @@ body.dragging {
     
     .models-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* Arena Page Tablet */
-    .arena-page .container > div:first-of-type {
-        grid-template-columns: 1fr !important;
-        gap: 1.5rem !important;
-    }
-    
-    .arena-controls > div {
-        flex-direction: column !important;
-        align-items: stretch !important;
-    }
-    
-    .arena-controls > div > div {
-        width: 100% !important;
-        min-width: auto !important;
     }
 }
 
@@ -201,56 +175,6 @@ body.dragging {
         right: 1rem;
         left: 1rem;
         padding: 1rem;
-    }
-    
-    /* Arena Page Mobile Optimizations */
-    .arena-page {
-        padding: 2rem 0;
-    }
-    
-    .arena-header {
-        margin-bottom: 2rem !important;
-    }
-    
-    .arena-header h1 {
-        font-size: 2rem !important;
-    }
-    
-    .arena-header p {
-        font-size: 1rem !important;
-    }
-    
-    .arena-controls {
-        padding: 1.5rem !important;
-    }
-    
-    .arena-controls .btn-lg {
-        width: 100%;
-        margin-top: 1rem;
-    }
-    
-    .arena-page .container > div:first-of-type {
-        display: flex !important;
-        flex-direction: column !important;
-    }
-    
-    #arenaBoard {
-        max-width: 100% !important;
-        width: 100% !important;
-        margin: 0 auto !important;
-    }
-    
-    .arena-page .card {
-        margin-bottom: 1.5rem;
-        padding: 1.5rem !important;
-    }
-    
-    #benchmarkStats {
-        font-size: 0.875rem;
-    }
-    
-    #arenaMoveLog {
-        max-height: 300px !important;
     }
 }
 
@@ -394,103 +318,6 @@ body.dragging {
         padding: 0.625rem;
         font-size: 0.8125rem;
     }
-    
-    /* Arena Page Mobile */
-    .arena-page {
-        padding: 1.5rem 0;
-    }
-    
-    .arena-header {
-        margin-bottom: 1.5rem !important;
-        padding: 0 0.5rem;
-    }
-    
-    .arena-header h1 {
-        font-size: 1.75rem !important;
-    }
-    
-    .arena-header p {
-        font-size: 0.9375rem !important;
-    }
-    
-    .arena-controls {
-        padding: 1rem !important;
-        margin-bottom: 1rem !important;
-    }
-    
-    .arena-controls label {
-        font-size: 0.875rem;
-    }
-    
-    .arena-controls select {
-        padding: 0.625rem !important;
-        font-size: 0.9375rem;
-    }
-    
-    .arena-controls .btn-lg {
-        padding: 0.875rem 1.25rem;
-        font-size: 0.9375rem;
-    }
-    
-    .arena-page .card {
-        padding: 1rem !important;
-        margin-bottom: 1rem !important;
-    }
-    
-    .arena-page h3 {
-        font-size: 1.25rem !important;
-    }
-    
-    .arena-page h4 {
-        font-size: 1.125rem !important;
-        margin-bottom: 0.75rem !important;
-    }
-    
-    #whitePlayerName,
-    #blackPlayerName {
-        font-size: 1.125rem !important;
-    }
-    
-    .arena-page .badge {
-        padding: 0.375rem 0.75rem;
-        font-size: 0.75rem;
-    }
-    
-    #arenaBoard {
-        max-width: 100% !important;
-        width: 100% !important;
-        height: auto !important;
-    }
-    
-    #benchmarkStats {
-        font-size: 0.8125rem;
-    }
-    
-    #benchmarkStats > div > div > div {
-        grid-template-columns: 1fr !important;
-        gap: 0.5rem !important;
-    }
-    
-    #arenaMoveLog {
-        max-height: 250px !important;
-        font-size: 0.8125rem !important;
-    }
-    
-    #arenaMoveLog > div {
-        padding: 0.375rem !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 0.25rem;
-    }
-    
-    #arenaStatus {
-        font-size: 0.9375rem;
-    }
-    
-    .arena-page .spinner-sm {
-        width: 20px !important;
-        height: 20px !important;
-    }
 }
 
 /* Very Small Mobile */
@@ -510,78 +337,5 @@ body.dragging {
     .logo {
         width: 40px;
         height: 40px;
-    }
-    
-    .arena-header h1 {
-        font-size: 1.5rem !important;
-    }
-    
-    .arena-controls {
-        padding: 0.75rem !important;
-    }
-    
-    .arena-page h3 {
-        font-size: 1.125rem !important;
-    }
-    
-    #benchmarkStats {
-        font-size: 0.75rem;
-    }
-}
-
-/* Landscape Mode Fix for Mobile */
-@media (max-height: 600px) and (orientation: landscape) {
-    .hero {
-        min-height: auto;
-        padding: 2rem 0;
-    }
-    
-    .arena-page {
-        padding: 1rem 0;
-    }
-    
-    .arena-header {
-        margin-bottom: 1rem !important;
-    }
-    
-    #arenaBoard {
-        max-width: 400px !important;
-        margin: 0 auto !important;
-    }
-    
-    #arenaMoveLog {
-        max-height: 200px !important;
-    }
-}
-
-/* Touch device optimizations */
-@media (hover: none) and (pointer: coarse) {
-    .btn {
-        min-height: 44px;
-    }
-    
-    .nav-link {
-        min-height: 44px;
-    }
-    
-    .model-option {
-        min-height: 60px;
-    }
-    
-    /* Prevent body scroll when dragging */
-    body.dragging {
-        position: fixed;
-        width: 100%;
-        overflow: hidden;
-    }
-    
-    .chessboard-container,
-    #chessboard,
-    #arenaBoard {
-        touch-action: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
     }
 }
