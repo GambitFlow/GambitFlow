@@ -1,0 +1,99 @@
+/* Neural Network Background */
+
+.neural-network-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+#neuralCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+}
+
+/* Animated gradient overlay */
+.neural-network-bg::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+        circle at 20% 50%,
+        rgba(59, 130, 246, 0.08) 0%,
+        transparent 50%
+    ),
+    radial-gradient(
+        circle at 80% 80%,
+        rgba(6, 182, 212, 0.08) 0%,
+        transparent 50%
+    ),
+    radial-gradient(
+        circle at 40% 20%,
+        rgba(167, 139, 250, 0.05) 0%,
+        transparent 50%
+    );
+    animation: neuralGradient 20s ease infinite;
+}
+
+@keyframes neuralGradient {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    33% {
+        transform: translate(5%, -5%) rotate(120deg);
+    }
+    66% {
+        transform: translate(-5%, 5%) rotate(240deg);
+    }
+}
+
+/* Floating particles */
+.neural-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-blue);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: floatParticle 15s infinite ease-in-out;
+}
+
+@keyframes floatParticle {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(var(--tx, 100px), var(--ty, -100px)) scale(1.5);
+        opacity: 0.6;
+    }
+}
+
+/* Mobile optimization */
+@media (max-width: 768px) {
+    #neuralCanvas {
+        opacity: 0.1;
+    }
+    
+    .neural-network-bg::before {
+        animation-duration: 30s;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .neural-network-bg::before,
+    .neural-particle {
+        animation: none;
+    }
+}
