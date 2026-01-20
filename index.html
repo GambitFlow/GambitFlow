@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Custom Stylesheets -->
+    <!-- Custom Stylesheets - Modular Structure -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/neural-network-bg.css">
     <link rel="stylesheet" href="css/pages.css">
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/responsive.css">
@@ -102,7 +103,7 @@
         </div>
     </footer>
 
-    <!-- Scripts - Deferred Loading -->
+    <!-- External Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chessboard-js/1.0.0/chessboard-1.0.0.min.js" defer></script>
@@ -111,9 +112,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" defer></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     
-    <!-- Core JS -->
+    <!-- Core JS - Load in order -->
     <script src="js/core/config.js" defer></script>
     <script src="js/core/state.js" defer></script>
+    
+    <!-- Templates - Load before router -->
+    <script src="js/templates/play-page.js" defer></script>
+    <script src="js/templates/arena-page.js" defer></script>
+    
+    <!-- Router - Load after templates -->
     <script src="js/core/router.js" defer></script>
     
     <!-- Module JS -->
@@ -122,8 +129,9 @@
     <script src="js/modules/arena.js" defer></script>
     <script src="js/modules/status-monitor.js" defer></script>
     <script src="js/modules/markdown-renderer.js" defer></script>
+    <script src="js/modules/neural-network-bg.js" defer></script>
     
-    <!-- Main JS -->
+    <!-- Main JS - Load last -->
     <script src="js/main.js" defer></script>
 </body>
-        </html>
+</html>
