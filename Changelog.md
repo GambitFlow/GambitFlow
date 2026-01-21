@@ -227,7 +227,7 @@ js/
 ### Semantic Versioning Scheme
 
 - **MAJOR** (1.x.x): Breaking changes, major redesigns
-- **MINOR** (x.2.x): New features, backwards compatible
+- **MINOR** (x.1.x): New features, backwards compatible
 - **PATCH** (x.x.1): Bug fixes, minor improvements
 
 ---
