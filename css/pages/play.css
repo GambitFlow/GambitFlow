@@ -1,0 +1,326 @@
+/* Play Page Styles */
+
+.play-page {
+    padding: 2rem 0;
+    min-height: calc(100vh - 75px);
+}
+
+.play-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.play-header h1 {
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.play-header p {
+    color: #e2e8f0;
+    font-size: 1.0625rem;
+}
+
+.play-header-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.play-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr 320px;
+    gap: 2rem;
+    align-items: start;
+}
+
+.sidebar-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    margin-bottom: 1.75rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.sidebar-card .card-header {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.05));
+    border-bottom: 1px solid var(--border-light);
+    color: #ffffff;
+}
+
+.model-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    margin: 1rem;
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: var(--transition);
+    color: #ffffff;
+}
+
+.model-option:hover {
+    border-color: var(--accent-blue);
+    background: var(--bg-card-hover);
+    transform: translateX(4px);
+}
+
+.model-option.active {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(6, 182, 212, 0.1));
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.board-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#chessboard {
+    width: 100% !important;
+    max-width: 600px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.game-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.game-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.info-item {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+}
+
+.info-label {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.info-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Thinking Indicator */
+.thinking-indicator {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--accent-blue);
+    border-radius: var(--radius-xl);
+    padding: 1.25rem 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);
+    transform: translateY(150%);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    color: #ffffff;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.thinking-indicator.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.thinking-indicator .spinner-sm {
+    border-color: var(--border);
+    border-top-color: var(--accent-blue);
+}
+
+.move-history-container {
+    padding: 1.5rem;
+    max-height: 480px;
+    overflow-y: auto;
+}
+
+.pgn-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.pgn-table thead {
+    position: sticky;
+    top: 0;
+    background: var(--bg-tertiary);
+    z-index: 1;
+}
+
+.pgn-table th {
+    padding: 0.875rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #e2e8f0;
+    border-bottom: 2px solid var(--border);
+}
+
+.pgn-table td {
+    padding: 0.875rem;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9375rem;
+    color: #e2e8f0;
+}
+
+.pgn-table tr:hover td {
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.pgn-table .move-num {
+    color: #cbd5e1;
+    font-weight: 600;
+}
+
+.pgn-table .move-white,
+.pgn-table .move-black {
+    color: #ffffff;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.pgn-table .move-white:hover,
+.pgn-table .move-black:hover {
+    color: var(--accent-blue);
+}
+
+/* Mobile Responsive */
+@media (max-width: 1200px) {
+    .play-grid {
+        grid-template-columns: 280px 1fr 280px;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .play-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .play-grid aside:last-child {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .play-page {
+        padding: 1.5rem 0;
+    }
+    
+    .play-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem;
+    }
+    
+    .play-header h1 {
+        font-size: 1.875rem;
+    }
+    
+    .play-header-actions {
+        width: 100%;
+    }
+    
+    .play-header-actions .btn {
+        flex: 1;
+    }
+    
+    .game-controls {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .thinking-indicator {
+        bottom: 1rem;
+        right: 1rem;
+        left: 1rem;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .play-header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .play-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .sidebar-card {
+        margin-bottom: 1.25rem;
+    }
+    
+    .model-option {
+        padding: 1rem;
+        margin: 0.75rem;
+    }
+    
+    #chessboard {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .board-wrapper {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .pgn-table th,
+    .pgn-table td {
+        padding: 0.625rem;
+        font-size: 0.8125rem;
+    }
+    
+    .game-controls {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
