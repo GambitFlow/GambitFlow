@@ -1,13 +1,11 @@
-// Complex Neural Network Background - Full Screen
+// Enhanced Neural Network Background with THREE.js
 const NeuralNetworkBG = {
     scene: null,
     camera: null,
     renderer: null,
-    neurons: [],
-    connections: [],
-    layers: [],
+    particles: null,
+    lines: [],
     animationId: null,
-    mouse: { x: 0, y: 0 },
     
     init() {
         const bgContainer = document.createElement('div');
@@ -18,15 +16,14 @@ const NeuralNetworkBG = {
         const canvas = document.getElementById('neuralCanvas');
         
         this.scene = new THREE.Scene();
-        this.scene.fog = new THREE.Fog(0x0a0e27, 50, 150);
         
         this.camera = new THREE.PerspectiveCamera(
             75,
             window.innerWidth / window.innerHeight,
             0.1,
-            300
+            1000
         );
-        this.camera.position.set(0, 0, 80);
+        this.camera.position.z = 50;
         
         this.renderer = new THREE.WebGLRenderer({
             canvas: canvas,
@@ -36,281 +33,131 @@ const NeuralNetworkBG = {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         
-        this.addLights();
-        this.createComplexNeuralNetwork();
+        this.createParticles();
+        this.createConnections();
         this.animate();
         
         window.addEventListener('resize', () => this.onResize());
-        window.addEventListener('mousemove', (e) => this.onMouseMove(e));
     },
     
-    addLights() {
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-        this.scene.add(ambientLight);
-        
-        const pointLight1 = new THREE.PointLight(0x4f9eff, 1.5, 150);
-        pointLight1.position.set(40, 40, 30);
-        this.scene.add(pointLight1);
-        
-        const pointLight2 = new THREE.PointLight(0x22d3ee, 1.2, 150);
-        pointLight2.position.set(-40, -30, 30);
-        this.scene.add(pointLight2);
-        
-        const pointLight3 = new THREE.PointLight(0xa78bfa, 1, 150);
-        pointLight3.position.set(0, 40, -30);
-        this.scene.add(pointLight3);
-    },
-    
-    createComplexNeuralNetwork() {
+    createParticles() {
         const isMobile = window.innerWidth < 768;
-        const aspectRatio = window.innerWidth / window.innerHeight;
+        const particleCount = isMobile ? 50 : 100;
         
-        const layerSizes = isMobile 
-            ? [8, 12, 16, 12, 8] 
-            : [12, 18, 24, 18, 12];
+        const geometry = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
+        const velocities = [];
         
-        const layerSpacing = isMobile ? 25 : 35;
-        const neuronSpacingY = isMobile ? 8 : 6;
-        const spreadX = aspectRatio > 1 ? 60 : 40;
-        const spreadY = 50;
+        for (let i = 0; i < particleCount; i++) {
+            positions[i * 3] = (Math.random() - 0.5) * 100;
+            positions[i * 3 + 1] = (Math.random() - 0.5) * 100;
+            positions[i * 3 + 2] = (Math.random() - 0.5) * 50;
+            
+            velocities.push({
+                x: (Math.random() - 0.5) * 0.02,
+                y: (Math.random() - 0.5) * 0.02,
+                z: (Math.random() - 0.5) * 0.01
+            });
+        }
         
-        layerSizes.forEach((size, layerIndex) => {
-            const layer = [];
-            const x = (layerIndex - (layerSizes.length - 1) / 2) * layerSpacing;
-            
-            for (let i = 0; i < size; i++) {
-                const t = i / (size - 1);
-                const y = (t - 0.5) * spreadY;
-                const z = (Math.random() - 0.5) * 20;
-                
-                const neuron = this.createNeuron(x, y, z);
-                neuron.userData = {
-                    layer: layerIndex,
-                    index: i,
-                    basePos: new THREE.Vector3(x, y, z),
-                    phase: Math.random() * Math.PI * 2,
-                    speed: 0.3 + Math.random() * 0.7,
-                    amplitude: 1 + Math.random() * 2,
-                    rotationSpeed: (Math.random() - 0.5) * 0.02
-                };
-                layer.push(neuron);
-                this.neurons.push(neuron);
-                this.scene.add(neuron);
-            }
-            
-            this.layers.push(layer);
-            
-            if (layerIndex > 0) {
-                this.createLayerConnections(layerIndex);
-            }
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        
+        const material = new THREE.PointsMaterial({
+            color: 0x4f9eff,
+            size: 0.8,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending
         });
         
-        this.createSkipConnections();
+        this.particles = new THREE.Points(geometry, material);
+        this.particles.userData.velocities = velocities;
+        this.scene.add(this.particles);
     },
     
-    createLayerConnections(layerIndex) {
-        const currentLayer = this.layers[layerIndex];
-        const prevLayer = this.layers[layerIndex - 1];
+    createConnections() {
+        const positions = this.particles.geometry.attributes.position.array;
+        const maxDistance = 15;
         
-        currentLayer.forEach((neuron, i) => {
-            const connectionCount = Math.floor(prevLayer.length * (0.5 + Math.random() * 0.4));
-            const startIdx = Math.max(0, i - Math.floor(connectionCount / 2));
-            const endIdx = Math.min(prevLayer.length, startIdx + connectionCount);
-            
-            for (let j = startIdx; j < endIdx; j++) {
-                if (Math.random() > 0.3) {
-                    const connection = this.createConnection(prevLayer[j], neuron, 'layer');
-                    this.connections.push(connection);
-                    this.scene.add(connection);
+        for (let i = 0; i < positions.length; i += 3) {
+            for (let j = i + 3; j < positions.length; j += 3) {
+                const dx = positions[i] - positions[j];
+                const dy = positions[i + 1] - positions[j + 1];
+                const dz = positions[i + 2] - positions[j + 2];
+                const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+                
+                if (distance < maxDistance) {
+                    const geometry = new THREE.BufferGeometry();
+                    const linePositions = new Float32Array([
+                        positions[i], positions[i + 1], positions[i + 2],
+                        positions[j], positions[j + 1], positions[j + 2]
+                    ]);
+                    geometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+                    
+                    const material = new THREE.LineBasicMaterial({
+                        color: 0x22d3ee,
+                        transparent: true,
+                        opacity: 0.3 * (1 - distance / maxDistance),
+                        blending: THREE.AdditiveBlending
+                    });
+                    
+                    const line = new THREE.Line(geometry, material);
+                    line.userData = { i: i / 3, j: j / 3 };
+                    this.lines.push(line);
+                    this.scene.add(line);
                 }
             }
-        });
-    },
-    
-    createSkipConnections() {
-        for (let i = 0; i < this.layers.length - 2; i++) {
-            const layer = this.layers[i];
-            const targetLayer = this.layers[i + 2];
-            
-            const skipCount = Math.floor(layer.length * 0.15);
-            
-            for (let j = 0; j < skipCount; j++) {
-                const sourceIdx = Math.floor(Math.random() * layer.length);
-                const targetIdx = Math.floor(Math.random() * targetLayer.length);
-                
-                const connection = this.createConnection(
-                    layer[sourceIdx], 
-                    targetLayer[targetIdx], 
-                    'skip'
-                );
-                this.connections.push(connection);
-                this.scene.add(connection);
-            }
         }
     },
     
-    createNeuron(x, y, z) {
-        const size = 0.3 + Math.random() * 0.3;
-        const geometry = new THREE.SphereGeometry(size, 16, 16);
+    updateParticles() {
+        const positions = this.particles.geometry.attributes.position.array;
+        const velocities = this.particles.userData.velocities;
         
-        const color = Math.random() > 0.7 ? 0x22d3ee : 0x4f9eff;
-        
-        const material = new THREE.MeshPhongMaterial({
-            color: color,
-            emissive: color,
-            emissiveIntensity: 0.6,
-            shininess: 100,
-            transparent: true,
-            opacity: 0.95
-        });
-        
-        const neuron = new THREE.Mesh(geometry, material);
-        neuron.position.set(x, y, z);
-        
-        const glowGeometry = new THREE.SphereGeometry(size * 1.8, 16, 16);
-        const glowMaterial = new THREE.MeshBasicMaterial({
-            color: color,
-            transparent: true,
-            opacity: 0.15,
-            blending: THREE.AdditiveBlending
-        });
-        const glow = new THREE.Mesh(glowGeometry, glowMaterial);
-        neuron.add(glow);
-        
-        return neuron;
-    },
-    
-    createConnection(neuron1, neuron2, type) {
-        const points = [];
-        points.push(neuron1.position.clone());
-        
-        const numMidPoints = type === 'skip' ? 3 : 2;
-        for (let i = 1; i < numMidPoints; i++) {
-            const t = i / numMidPoints;
-            const mid = new THREE.Vector3().lerpVectors(neuron1.position, neuron2.position, t);
-            mid.z += (Math.random() - 0.5) * 5;
-            mid.x += (Math.random() - 0.5) * 3;
-            mid.y += (Math.random() - 0.5) * 3;
-            points.push(mid);
+        for (let i = 0; i < positions.length; i += 3) {
+            positions[i] += velocities[i / 3].x;
+            positions[i + 1] += velocities[i / 3].y;
+            positions[i + 2] += velocities[i / 3].z;
+            
+            if (positions[i] < -50 || positions[i] > 50) velocities[i / 3].x *= -1;
+            if (positions[i + 1] < -50 || positions[i + 1] > 50) velocities[i / 3].y *= -1;
+            if (positions[i + 2] < -25 || positions[i + 2] > 25) velocities[i / 3].z *= -1;
         }
         
-        points.push(neuron2.position.clone());
-        
-        const curve = new THREE.CatmullRomCurve3(points);
-        const tubeGeometry = new THREE.TubeGeometry(
-            curve, 
-            type === 'skip' ? 40 : 30, 
-            type === 'skip' ? 0.06 : 0.08, 
-            8, 
-            false
-        );
-        
-        const baseOpacity = type === 'skip' ? 0.25 : 0.4;
-        const color = type === 'skip' ? 0xa78bfa : 0x22d3ee;
-        
-        const material = new THREE.MeshBasicMaterial({
-            color: color,
-            transparent: true,
-            opacity: baseOpacity,
-            blending: THREE.AdditiveBlending
-        });
-        
-        const tube = new THREE.Mesh(tubeGeometry, material);
-        tube.userData = {
-            neuron1: neuron1,
-            neuron2: neuron2,
-            curve: curve,
-            baseOpacity: baseOpacity,
-            pulsePhase: Math.random() * Math.PI * 2,
-            pulseSpeed: 0.5 + Math.random() * 1.5,
-            type: type,
-            midPoints: points.slice(1, -1),
-            color: color
-        };
-        
-        return tube;
+        this.particles.geometry.attributes.position.needsUpdate = true;
     },
     
-    updateNeurons(time) {
-        this.neurons.forEach((neuron) => {
-            const data = neuron.userData;
+    updateConnections() {
+        const positions = this.particles.geometry.attributes.position.array;
+        const maxDistance = 15;
+        
+        this.lines.forEach(line => {
+            const i = line.userData.i * 3;
+            const j = line.userData.j * 3;
             
-            const offsetX = Math.sin(time * data.speed + data.phase) * data.amplitude * 0.5;
-            const offsetY = Math.cos(time * data.speed * 0.8 + data.phase) * data.amplitude;
-            const offsetZ = Math.sin(time * data.speed * 1.2 + data.phase) * data.amplitude * 0.3;
+            const linePositions = line.geometry.attributes.position.array;
+            linePositions[0] = positions[i];
+            linePositions[1] = positions[i + 1];
+            linePositions[2] = positions[i + 2];
+            linePositions[3] = positions[j];
+            linePositions[4] = positions[j + 1];
+            linePositions[5] = positions[j + 2];
             
-            neuron.position.x = data.basePos.x + offsetX;
-            neuron.position.y = data.basePos.y + offsetY;
-            neuron.position.z = data.basePos.z + offsetZ;
+            const dx = positions[i] - positions[j];
+            const dy = positions[i + 1] - positions[j + 1];
+            const dz = positions[i + 2] - positions[j + 2];
+            const distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
             
-            const pulseIntensity = 0.4 + Math.sin(time * 2 + data.phase) * 0.3;
-            neuron.material.emissiveIntensity = pulseIntensity;
-            
-            const scale = 1 + Math.sin(time * 3 + data.phase) * 0.15;
-            neuron.scale.setScalar(scale);
-            
-            neuron.rotation.x += data.rotationSpeed;
-            neuron.rotation.y += data.rotationSpeed * 0.7;
+            line.material.opacity = distance < maxDistance ? 0.3 * (1 - distance / maxDistance) : 0;
+            line.geometry.attributes.position.needsUpdate = true;
         });
-    },
-    
-    updateConnections(time) {
-        this.connections.forEach(connection => {
-            const data = connection.userData;
-            
-            const points = [];
-            points.push(data.neuron1.position.clone());
-            
-            data.midPoints.forEach((midPoint, idx) => {
-                const offset = Math.sin(time * 2 + data.pulsePhase + idx) * 2;
-                const newMid = midPoint.clone();
-                newMid.z += offset;
-                points.push(newMid);
-            });
-            
-            points.push(data.neuron2.position.clone());
-            
-            const newCurve = new THREE.CatmullRomCurve3(points);
-            const tubeSize = data.type === 'skip' ? 0.06 : 0.08;
-            const segments = data.type === 'skip' ? 40 : 30;
-            const newGeometry = new THREE.TubeGeometry(newCurve, segments, tubeSize, 8, false);
-            
-            connection.geometry.dispose();
-            connection.geometry = newGeometry;
-            
-            const pulse = Math.sin(time * data.pulseSpeed + data.pulsePhase) * 0.5 + 0.5;
-            connection.material.opacity = data.baseOpacity + pulse * 0.3;
-            
-            const colorPulse = Math.sin(time * 0.5 + data.pulsePhase) * 0.5 + 0.5;
-            if (data.type === 'skip') {
-                connection.material.color.setHex(
-                    colorPulse > 0.5 ? 0xa78bfa : 0x8b5cf6
-                );
-            } else {
-                connection.material.color.setHex(
-                    colorPulse > 0.5 ? 0x22d3ee : 0x06b6d4
-                );
-            }
-        });
-    },
-    
-    onMouseMove(event) {
-        this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
     },
     
     animate() {
-        const time = Date.now() * 0.0008;
+        this.updateParticles();
+        this.updateConnections();
         
-        this.updateNeurons(time);
-        this.updateConnections(time);
-        
-        this.camera.position.x += (this.mouse.x * 10 - this.camera.position.x) * 0.03;
-        this.camera.position.y += (this.mouse.y * 10 - this.camera.position.y) * 0.03;
-        this.camera.lookAt(this.scene.position);
-        
-        this.scene.rotation.y = Math.sin(time * 0.5) * 0.02;
-        this.scene.rotation.x = Math.cos(time * 0.3) * 0.01;
+        this.particles.rotation.y += 0.0002;
         
         this.renderer.render(this.scene, this.camera);
         this.animationId = requestAnimationFrame(() => this.animate());
@@ -327,19 +174,15 @@ const NeuralNetworkBG = {
             cancelAnimationFrame(this.animationId);
         }
         
-        this.neurons.forEach(neuron => {
-            neuron.geometry.dispose();
-            neuron.material.dispose();
-            if (neuron.children.length > 0) {
-                neuron.children[0].geometry.dispose();
-                neuron.children[0].material.dispose();
-            }
+        this.lines.forEach(line => {
+            line.geometry.dispose();
+            line.material.dispose();
         });
         
-        this.connections.forEach(connection => {
-            connection.geometry.dispose();
-            connection.material.dispose();
-        });
+        if (this.particles) {
+            this.particles.geometry.dispose();
+            this.particles.material.dispose();
+        }
         
         if (this.renderer) {
             this.renderer.dispose();
