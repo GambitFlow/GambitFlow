@@ -1,22 +1,69 @@
-// Enhanced Chess Game Module
+// Chess Game Module - Modal Fixed
 const ChessGame = {
     gameStarted: false,
     gameStartTime: null,
     timeInterval: null,
     soundEnabled: true,
     
-    // Initialize chess game
     init() {
         this.gameStarted = false;
-        this.showColorSelection();
+        
+        STATE.game = new Chess();
+        
+        const config = {
+            draggable: false,
+            position: 'start',
+            pieceTheme: function(piece) {
+                return 'assets/pieces/' + piece + '.svg';
+            }
+        };
+        
+        STATE.board = Chessboard('chessboard', config);
+        
+        $(window).resize(() => {
+            if (STATE.board) STATE.board.resize();
+        });
+        
+        this.updateStatus();
+        this.updateMoveHistory();
+        this.updateMoveCount();
+        $('#gameStatus').text('Click "New Game" to start');
     },
     
-    // Start game with selected color
-    startGame(color) {
+    showColorSelection() {
+        if (!$('#colorModal').length) {
+            const modal = $(`
+                <div class="color-selection-modal" id="colorModal">
+                    <div class="color-modal-content scale-in">
+                        <h2>Choose Your Color</h2>
+                        <p>Select which color you want to play as</p>
+                        <div class="color-options">
+                            <div class="color-option white" onclick="ChessGame.startGameWithColor('white')">
+                                <i class="fas fa-chess-king"></i>
+                                <h3>White</h3>
+                                <p>Play first</p>
+                            </div>
+                            <div class="color-option black" onclick="ChessGame.startGameWithColor('black')">
+                                <i class="fas fa-chess-king"></i>
+                                <h3>Black</h3>
+                                <p>AI plays first</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+            $('body').append(modal);
+        }
+        $('#colorModal').addClass('active');
+    },
+
+    startGameWithColor(color) {
+        $('#colorModal').removeClass('active');
+        
         STATE.playerColor = color;
         this.gameStarted = true;
         
-        STATE.game = new Chess();
+        STATE.game.reset();
         
         const config = {
             draggable: true,
@@ -32,10 +79,6 @@ const ChessGame = {
         
         STATE.board = Chessboard('chessboard', config);
         
-        $(window).resize(() => {
-            if (STATE.board) STATE.board.resize();
-        });
-        
         this.gameStartTime = Date.now();
         this.startTimer();
         this.updateStatus();
@@ -47,36 +90,6 @@ const ChessGame = {
         }
     },
 
-    // Show color selection
-    showColorSelection() {
-        // Create modal if it doesn't exist
-        if (!$('#colorModal').length) {
-            const modal = $(`
-                <div class="color-selection-modal" id="colorModal">
-                    <div class="color-modal-content scale-in">
-                        <h2>Choose Your Color</h2>
-                        <p>Select which color you want to play as</p>
-                        <div class="color-options">
-                            <div class="color-option white" onclick="ChessGame.startGame('white')">
-                                <i class="fas fa-chess-king"></i>
-                                <h3>White</h3>
-                                <p>Play first</p>
-                            </div>
-                            <div class="color-option black" onclick="ChessGame.startGame('black')">
-                                <i class="fas fa-chess-king"></i>
-                                <h3>Black</h3>
-                                <p>AI plays first</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `);
-            $('body').append(modal);
-        }
-        $('#colorModal').addClass('active');
-    },
-
-    // Handle drag start
     onDragStart(source, piece) {
         if (!this.gameStarted) return false;
         if (STATE.game.game_over()) return false;
@@ -91,7 +104,6 @@ const ChessGame = {
         }
     },
 
-    // Handle piece drop
     onDrop(source, target) {
         const move = STATE.game.move({
             from: source,
@@ -114,12 +126,10 @@ const ChessGame = {
         }
     },
 
-    // Update board position
     onSnapEnd() {
         STATE.board.position(STATE.game.fen());
     },
 
-    // Make AI move
     async makeAIMove() {
         if (STATE.isThinking || STATE.game.game_over()) return;
         
@@ -160,12 +170,14 @@ const ChessGame = {
         }
     },
 
-    // Update game status
     updateStatus() {
         let status = 'Your move';
         let statusColor = 'var(--text-primary)';
         
-        if (STATE.game.in_checkmate()) {
+        if (!this.gameStarted) {
+            status = 'Click "New Game" to start';
+            statusColor = 'var(--text-secondary)';
+        } else if (STATE.game.in_checkmate()) {
             status = STATE.game.turn() === 'w' ? '🏆 Black wins by checkmate!' : '🏆 White wins by checkmate!';
             statusColor = 'var(--accent-green)';
             this.stopTimer();
@@ -196,7 +208,6 @@ const ChessGame = {
         $('#gameStatus').text(status).css('color', statusColor);
     },
 
-    // Update move history with PGN table
     updateMoveHistory() {
         const history = STATE.game.history();
         let html = '';
@@ -219,13 +230,11 @@ const ChessGame = {
         container.scrollTop(container[0].scrollHeight);
     },
 
-    // Update move count
     updateMoveCount() {
         const moveCount = STATE.game.history().length;
         $('#moveCount').text(moveCount);
     },
 
-    // Start game timer
     startTimer() {
         this.timeInterval = setInterval(() => {
             const elapsed = Date.now() - this.gameStartTime;
@@ -235,14 +244,12 @@ const ChessGame = {
         }, 1000);
     },
 
-    // Stop game timer
     stopTimer() {
         if (this.timeInterval) {
             clearInterval(this.timeInterval);
         }
     },
 
-    // Select AI model
     selectModel(model) {
         STATE.currentModel = model;
         
@@ -250,11 +257,9 @@ const ChessGame = {
         $(`.model-option[data-model="${model}"]`).addClass('active');
     },
 
-    // Undo last move
     undoMove() {
         if (!this.gameStarted || STATE.isThinking) return;
         
-        // Undo player move and AI move
         STATE.game.undo();
         STATE.game.undo();
         STATE.board.position(STATE.game.fen());
@@ -264,13 +269,11 @@ const ChessGame = {
         this.updateMoveCount();
     },
 
-    // Flip board
     flipBoard() {
         if (!this.gameStarted) return;
         STATE.board.flip();
     },
 
-    // Get hint
     async hint() {
         if (!this.gameStarted || STATE.isThinking || STATE.game.game_over()) return;
         
@@ -294,7 +297,6 @@ const ChessGame = {
         }
     },
 
-    // Analyze position
     async analyzePosition() {
         if (!this.gameStarted) return;
         
@@ -306,7 +308,6 @@ const ChessGame = {
         }
     },
 
-    // Download PGN
     downloadPGN() {
         if (!this.gameStarted) return;
         
@@ -320,7 +321,6 @@ const ChessGame = {
         URL.revokeObjectURL(url);
     },
 
-    // Share game
     shareGame() {
         if (!this.gameStarted) return;
         
@@ -339,45 +339,23 @@ const ChessGame = {
         }
     },
 
-    // Toggle sound
     toggleSound() {
         this.soundEnabled = !this.soundEnabled;
         $('#soundStatus').text(this.soundEnabled ? 'On' : 'Off');
     },
 
-    // Play sound
     playSound(type) {
-        // Sound implementation would go here
-        // For now, just a placeholder
+        // Sound implementation placeholder
     },
 
-    // Reset game
     resetGame() {
-        if (!this.gameStarted) {
-            this.init();
-            return;
+        this.stopTimer();
+        
+        if (this.gameStarted) {
+            if (!confirm('Are you sure you want to start a new game?')) return;
         }
         
-        if (confirm('Are you sure you want to start a new game?')) {
-            this.stopTimer();
-            STATE.game.reset();
-            STATE.board.start();
-            STATE.isThinking = false;
-            STATE.lastEvaluation = 0;
-            
-            this.gameStartTime = Date.now();
-            this.startTimer();
-            this.updateStatus();
-            this.updateMoveHistory();
-            this.updateMoveCount();
-            
-            $('#evaluation').text('0.00');
-            $('#thinkingIndicator').removeClass('active');
-            
-            if (STATE.playerColor === 'black') {
-                setTimeout(() => this.makeAIMove(), 800);
-            }
-        }
+        this.showColorSelection();
     },
     
     showError(message) {
